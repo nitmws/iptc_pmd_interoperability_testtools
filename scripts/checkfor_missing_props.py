@@ -10,7 +10,7 @@ import json
 import yaml
 from pmdtools.exiftool import Exiftool
 
-currentdir = os.path.dirname(sys.argv[0])
+currentdir = os.path.dirname(os.path.realpath(__file__))
 
 with open('./config/scriptsconfig.yml') as yaml_file1:
     scriptconfigs = yaml.safe_load(yaml_file1)

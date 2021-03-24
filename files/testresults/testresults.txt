@@ -9,14 +9,3 @@ MISSING property: Image Region (XMP)[3]->Region Boundary (XMP)->Rectangle Width 
 MISSING property: Image Region (XMP)[3]->Region Boundary (XMP)->X-Axis Coordinate (XMP)
 MISSING property: Image Region (XMP)[3]->Region Boundary (XMP)->Y-Axis Coordinate (XMP)
 MISSING property: Copyright Notice (XMP)
-Tested(3) JSON file of image: testimg_benchSnow1t.jpg
-COMMENT in the file: Removed PMD: Copyright Notice
-MISSING property: Copyright Notice (Exif)
-MISSING property: Copyright Notice (IIM)
-MISSING property: Image Region (XMP)[2]->Region Boundary (XMP)->Rectangle Height (XMP)
-MISSING property: Image Region (XMP)[2]->Region Boundary (XMP)->Rectangle Width (XMP)
-MISSING property: Image Region (XMP)[3]->Region Boundary (XMP)->Rectangle Height (XMP)
-MISSING property: Image Region (XMP)[3]->Region Boundary (XMP)->Rectangle Width (XMP)
-MISSING property: Image Region (XMP)[3]->Region Boundary (XMP)->X-Axis Coordinate (XMP)
-MISSING property: Image Region (XMP)[3]->Region Boundary (XMP)->Y-Axis Coordinate (XMP)
-MISSING property: Copyright Notice (XMP)

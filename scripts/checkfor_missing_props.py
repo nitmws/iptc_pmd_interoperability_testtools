@@ -12,7 +12,8 @@ from pmdtools.exiftool import Exiftool
 
 currentdir = os.path.dirname(os.path.realpath(__file__))
 
-with open('./config/scriptsconfig.yml') as yaml_file1:
+CONFIGFP = currentdir + '/config/scriptsconfig.yml'
+with open(CONFIGFP) as yaml_file1:
     scriptconfigs = yaml.safe_load(yaml_file1)
 
 FILESDIR = currentdir + '/' + scriptconfigs['general']['filespathrel']
@@ -26,7 +27,8 @@ LOGFP = TESTRESULTSDIR + 'testresults.txt'
 IPTCPMDREFFP = REFDIR + 'IPTC-PhotometadataRef-Std2019.1.json'
 
 # load the dictionary with all field/property names as defined by exiftool as key
-with open('./config/pmdinvestigationguide.yml') as yaml_file1:
+INVESTIGATIONGUIDEFP = currentdir + '/config/pmdinvestigationguide.yml'
+with open(INVESTIGATIONGUIDEFP) as yaml_file1:
     pmdguide = yaml.safe_load(yaml_file1)
 
 
@@ -93,10 +95,10 @@ def check_pmdstructure(parent_propnames, refstru, teststru, testresultsfp):
 
 def check_mainpmd(test_json_fp, testresultsfp):
 
-    with open(IPTCPMDREFFP) as refjson_file:
+    with open(IPTCPMDREFFP, encoding='utf-8') as refjson_file:
         ipmdref = json.load(refjson_file)[0]
 
-    with open(test_json_fp) as testjson_file:
+    with open(test_json_fp, encoding='utf-8') as testjson_file:
         ipmdtest = json.load(testjson_file)[0]
 
     if 'File:Comment' in ipmdtest:

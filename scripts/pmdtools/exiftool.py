@@ -67,9 +67,11 @@ class Exiftool:
 
     def export_as_jsonfile(self, etjson_fp):
         """Export the metadata of this class to a JSON file"""
+        print(json.dumps(self._etdata, indent=2,
+                                ensure_ascii=False, sort_keys=True))
         filename = Path(etjson_fp)
         filename = filename.with_suffix('.json')
-        with filename.open(mode='w') as _f:
+        with filename.open(mode='w', encoding='utf-8') as _f:
             _f.write(json.dumps(self._etdata, indent=2,
                                 ensure_ascii=False, sort_keys=True))
 

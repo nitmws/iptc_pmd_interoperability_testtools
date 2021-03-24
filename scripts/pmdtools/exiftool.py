@@ -79,7 +79,7 @@ class Exiftool:
         """Import ExifTool metadata in a JSON file to this class"""
         if etjson_fp:
             if os.path.isfile(etjson_fp):
-                with open(etjson_fp, "r") as etpmdfile:
+                with open(etjson_fp, "r", encoding='utf-8') as etpmdfile:
                     self._etdata = json.load(etpmdfile)
 
     """

@@ -133,3 +133,13 @@ dmypy.json
 
 # Specific to this project
 _nitdev/
+files/backup/test2/_*.*
+files/backup/test3/_*.*
+files/cache/test2/_*.*
+files/cache/test3/_*.*
+files/test2/_*.*
+files/test3/_*.*
+files/testresults/_*.*
+
+
+

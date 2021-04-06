@@ -1,5 +1,5 @@
 """
-Script for matching the exiftool-JSON retrieved from a test image
+Script for matching property values of the exiftool-JSON retrieved from a test image
 against a JSON object acting as IPTC Standard reference
 
 """
@@ -9,37 +9,39 @@ import yaml
 import datetime
 from scripts import ipmdchecker
 
-currentdir: str = os.path.dirname(os.path.realpath(__file__))
+currentdir = os.path.dirname(os.path.realpath(__file__))
 
-CONFIGFP: str = currentdir + '/config/scriptsconfig.yml'
+CONFIGFP = currentdir + '/config/scriptsconfig.yml'
 with open(CONFIGFP) as yaml_file1:
     scriptconfigs = yaml.safe_load(yaml_file1)
 
-FILESDIR: str = currentdir + '/' + scriptconfigs['general']['filespathrel']
+FILESDIR = currentdir + '/' + scriptconfigs['general']['filespathrel']
 TESTRESULTSDIR = FILESDIR + 'testresults/'
 LOGFP = TESTRESULTSDIR + 'testresults_all.txt'
 
-# Test3 specific directories
-TEST3DIR: str = FILESDIR + 'test3/'
-CACHE3DIR: str = FILESDIR + 'cache/test3/'
-BACKUP3DIR: str = FILESDIR + 'backup/test3/'
+# Test2 specific directories
+TEST2DIR = FILESDIR + 'test2/'
+CACHE2DIR = FILESDIR + 'cache/test2/'
+BACKUP2DIR = FILESDIR + 'backup/test2/'
 
 
-def run_test3(testimgfn: str) -> None:
-    """Runs IPTC Photo Metadata Interoperability Test #3 with a single image file
+
+
+def run_test2(testimgfn: str) -> None:
+    """Runs IPTC Photo Metadata Interoperability Test #2 with a single image file
 
     :param testimgfn: file name of the to be tested image file
     :return: nothing
     """
     coretestimgfn = os.path.splitext(testimgfn)[0]
-    testimgfp = TEST3DIR + testimgfn
-    testjsonfp = CACHE3DIR + coretestimgfn + '.json'
+    testimgfp = TEST2DIR + testimgfn
+    testjsonfp = CACHE2DIR + coretestimgfn + '.json'
     testresults1fp = TESTRESULTSDIR + coretestimgfn + '.txt'
-    backupimgfp = BACKUP3DIR + testimgfn
+    backupimgfp = BACKUP2DIR + testimgfn
 
     ipmdchecker.readpmd_exiftool(testimgfp, testjsonfp)
     if os.path.isfile(testjsonfp):
-        msg = 'Tested(3) JSON file of image: ' + testimgfn
+        msg = 'Tested(2) JSON file of image: ' + testimgfn
         print(msg)
         ipmdchecker.append_line2file(msg, LOGFP)
         ipmdchecker.append_line2file(msg, testresults1fp)
@@ -48,7 +50,7 @@ def run_test3(testimgfn: str) -> None:
         ipmdchecker.append_line2file(msg, LOGFP)
         ipmdchecker.append_line2file(msg, testresults1fp)
 
-        ipmdchecker.check_mainpmd(testjsonfp, testresults1fp)
+        ipmdchecker.check_mainpmd(testjsonfp, testresults1fp, comparevalues=True)
         ipmdchecker.append_line2file('***** TEST FINISHED *****', testresults1fp)
         shutil.move(testimgfp, backupimgfp)
     else:
@@ -56,12 +58,12 @@ def run_test3(testimgfn: str) -> None:
 
 
 def testdummy1():
-    testfilename = '_testimg_benchSnow1t2'
-    testfp = '../files/cache/test3/' + testfilename + '.json'
+    testfilename = '_test2_example1'
+    testfp = '../files/cache/test2/' + testfilename + '.json'
     testresults1fp = TESTRESULTSDIR + testfilename + '.txt'
     ipmdchecker.append_line2file('Tested JSON file: ' + testfp, LOGFP)
     ipmdchecker.append_line2file('Tested JSON file: ' + testfp, testresults1fp)
-    ipmdchecker.check_mainpmd(testfp, testresults1fp)
+    ipmdchecker.check_mainpmd(testfp, testresults1fp, comparevalues=True)
 
 
 if __name__ == '__main__':
@@ -71,7 +73,7 @@ if __name__ == '__main__':
     if DEV:
         testdummy1()
     else:
-        foundtest3images = ipmdchecker.find_testfiles(TEST3DIR)
-        print(foundtest3images)
-        for singletestimgfn in foundtest3images:
-            run_test3(singletestimgfn)
+        foundtest2images = ipmdchecker.find_testfiles(TEST2DIR)
+        print(foundtest2images)
+        for testimgfn in foundtest2images:
+            run_test2(testimgfn)

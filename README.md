@@ -42,6 +42,8 @@ This repository provides answers to this question. Currently these checks are su
 
 * checkfor_missing_props.py: all top level properties of the IPTC PMD Standard and if defined all sub-properties are matched against the properties found in an image file. If an IPTC PMD Standard property is not found in the tested image file this property is recorded in a text file in the testresults folder.
 
+* compare_prop_values.py: all top level properties of the IPTC PMD Standard and if defined all sub-properties are matched against the properties found in an image file and their values are compared. If a property is not found and if the value of a found property is not the same as in the IPTC reference image file this is recorded in a text file in the testresults folder.
+
 ### Use of ExifTool
 
 [ExifTool](https://exiftool.org) is a highly appreciated and widely used open source tool for embedding and retrieving a rich set of photo metadata. (Note: IPTC and Exif are the most prominent photo metadata standards but others, with a focus on special types of image content, exist too.) 

@@ -68,7 +68,7 @@ def testdummy1():
 
 if __name__ == '__main__':
 
-    DEV: bool = True
+    DEV: bool = False
 
     if DEV:
         testdummy1()

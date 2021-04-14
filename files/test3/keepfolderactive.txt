@@ -1,2 +1,2 @@
-﻿The existance of this file keeps this folder active in Git even if not file resides there.
+﻿The existance of this file keeps this folder active in Git even if no Test Tools file resides there.
 No other purpose than that.

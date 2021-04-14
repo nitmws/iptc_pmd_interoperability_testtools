@@ -1,6 +1,5 @@
 """
-Script for matching the exiftool-JSON retrieved from a test image
-against a JSON object acting as IPTC Standard reference
+Script for investigating which IPTC PMD properties are embedded into an image file, and which not
 
 """
 import os
@@ -19,10 +18,10 @@ FILESDIR: str = currentdir + '/' + scriptconfigs['general']['filespathrel']
 TESTRESULTSDIR = FILESDIR + 'testresults/'
 LOGFP = TESTRESULTSDIR + 'testresults_all.txt'
 
-# Test3 specific directories
-TEST3DIR: str = FILESDIR + 'test3/'
-CACHE3DIR: str = FILESDIR + 'cache/test3/'
-BACKUP3DIR: str = FILESDIR + 'backup/test3/'
+# Investigate1 specific directories
+INV1DIR: str = FILESDIR + 'investigate1/'
+CACHEINV1DIR: str = FILESDIR + 'cache/investigate1/'
+BACKUPINV1DIR: str = FILESDIR + 'backup/investigate1/'
 
 
 def run_test3(testimgfn: str) -> None:
@@ -32,10 +31,10 @@ def run_test3(testimgfn: str) -> None:
     :return: nothing
     """
     coretestimgfn = os.path.splitext(testimgfn)[0]
-    testimgfp = TEST3DIR + testimgfn
-    testjsonfp = CACHE3DIR + coretestimgfn + '.json'
+    testimgfp = INV1DIR + testimgfn
+    testjsonfp = CACHEINV1DIR + coretestimgfn + '.json'
     testresults1fp = TESTRESULTSDIR + coretestimgfn + '.txt'
-    backupimgfp = BACKUP3DIR + testimgfn
+    backupimgfp = BACKUPINV1DIR + testimgfn
 
     ipmdchecker.readpmd_exiftool(testimgfp, testjsonfp)
     if os.path.isfile(testjsonfp):
@@ -56,12 +55,12 @@ def run_test3(testimgfn: str) -> None:
 
 
 def testdummy1():
-    testfilename = '_testimg_benchSnow1t2'
-    testfp = '../files/cache/test3/' + testfilename + '.json'
-    testresults1fp = TESTRESULTSDIR + testfilename + '.txt'
-    ipmdchecker.append_line2file('Tested JSON file: ' + testfp, LOGFP)
-    ipmdchecker.append_line2file('Tested JSON file: ' + testfp, testresults1fp)
-    ipmdchecker.check_mainpmd(testfp, testresults1fp)
+    testfilename = '_inv1_example1'
+    testfp = '../files/cache/investigate1/' + testfilename + '.json'
+    testresults_txt_1fp = TESTRESULTSDIR + testfilename + '_inv1.txt'
+    testresults_csv_1fp = TESTRESULTSDIR + testfilename + '_inv1.csv'
+    ipmdchecker.append_line2file('Tested JSON file: ' + testfp, testresults_txt_1fp)
+    ipmdchecker.investigate_mainpmd(testfp, testresults_txt_1fp, testresults_csv_1fp)
 
 
 if __name__ == '__main__':

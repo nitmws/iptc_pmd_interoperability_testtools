@@ -7,7 +7,7 @@ import os
 import shutil
 import yaml
 import datetime
-from scripts import ipmdchecker
+from scripts import ipmdchecker2 as ipmdchecker
 
 currentdir = os.path.dirname(os.path.realpath(__file__))
 
@@ -68,7 +68,7 @@ def testdummy1():
 
 if __name__ == '__main__':
 
-    DEV: bool = False
+    DEV: bool = True
 
     if DEV:
         testdummy1()

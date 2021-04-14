@@ -1,0 +1,2 @@
+﻿The existance of this file keeps this folder active in Git even if not file resides there.
+No other purpose than that.

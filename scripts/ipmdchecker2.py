@@ -13,8 +13,8 @@ with open(CONFIGFP) as yaml_file1:
     scriptconfigs = yaml.safe_load(yaml_file1)
 
 # load the dictionary with all field/property names as defined by exiftool as key
-INVESTIGATIONGUIDEFP = currentdir + '/config/pmdinvestigationguide.yml'
-with open(INVESTIGATIONGUIDEFP) as yaml_file1:
+IPMDTECHGUIDEFP = currentdir + '/config/iptc-pmd-techguide.yml'
+with open(IPMDTECHGUIDEFP) as yaml_file1:
     pmdguide = yaml.safe_load(yaml_file1)
 
 FILESDIR = currentdir + '/' + scriptconfigs['general']['filespathrel']
@@ -74,9 +74,9 @@ def get_iptcpropname(etpropname: str, instructure: bool = False) -> str:
     """
     testetpropname = etpropname.replace(":", "_")
     iptcpropname = etpropname
-    groupname = 'topwithprefix'
+    groupname = 'et_topwithprefix'
     if instructure:
-        groupname = 'instructure'
+        groupname = 'et_instructure'
     if testetpropname in pmdguide[groupname]:
         iptcnameraw = pmdguide[groupname][testetpropname]['label']
         iptcpropname = iptcnameraw.split('|')[0]
@@ -92,9 +92,9 @@ def is_iptcpmdpropname(etpropname: str, instructure: bool = False) -> bool:
     :return:
     """
     testetpropname = etpropname.replace(":", "_")
-    groupname = 'topwithprefix'
+    groupname = 'et_topwithprefix'
     if instructure:
-        groupname = 'instructure'
+        groupname = 'et_instructure'
     isspecified: bool = False
     if testetpropname in pmdguide[groupname]:
         isspecified = True
@@ -167,7 +167,7 @@ def check_mainpmd(test_json_fp: str, testresultsfp: str, comparevalues: bool = F
     :param test_json_fp: path of the JSON file with metadata retrieved from the image file by ExifTool
     :param testresultsfp: path of the file for logging test results
     :param comparevalues: False: only missing properties are reported, True: changed property values too
-    :return:
+    :return: nothing
     """
     with open(IPTCPMDREFFP, encoding='utf-8') as refjson_file:
         ipmdref = json.load(refjson_file)[0]
@@ -227,3 +227,66 @@ def check_mainpmd(test_json_fp: str, testresultsfp: str, comparevalues: bool = F
             print(msg)
             append_line2file(msg, LOGFP)
             append_line2file(msg, testresultsfp)
+
+
+def investigate_mainpmd(test_json_fp: str, testresults_text_fp: str, testresults_csv_fp: str,
+                        csvsep: str = ',') -> None:
+    """Investigates which IPTC Photo Metadata top level (=properties not inside a structure) properties exist
+
+    :param test_json_fp: path of the JSON file with metadata retrieved from the image file by ExifTool
+    :param testresults_text_fp: path of the file for logging test results
+    :param testresults_csv_fp: path of the CSV file for logging test results
+    :return: nothing
+    """
+    with open(test_json_fp, encoding='utf-8') as testjson_file:
+        ipmdtest = json.load(testjson_file)[0]
+
+    append_line2file(f'topic{csvsep}sortorder{csvsep}IPTC PMD Name{csvsep}IIM prop{csvsep}XMP prop', testresults_csv_fp)
+    groupname = 'ipmd_top'
+    for ipmdpropid in pmdguide[groupname]:
+        ipmdprop: dict = pmdguide[groupname][ipmdpropid]
+        if 'label' in ipmdprop:
+            label: str = ipmdprop['label']
+        else:
+            label: str = 'UNKNOWN-ERROR'
+        msg: str = f'*** Investigating IPTC PMD property <{label}>'
+        print(msg)
+        append_line2file(msg, testresults_text_fp)
+        if 'ugtopic' in ipmdprop:
+            ugtopic: str = ipmdprop['ugtopic']
+        else:
+            ugtopic: str = 'xxx'
+        csvrow: str = ugtopic + csvsep
+        if 'sortorder' in ipmdprop:
+            sortorder: str = ipmdprop['sortorder']
+        else:
+            sortorder: str = 'xxx'
+        csvrow += sortorder + csvsep
+        csvrow += label + csvsep
+        if 'etIIM' in ipmdprop:
+            ettag = ipmdprop['etIIM']
+            if ettag in ipmdtest:
+                keymsg = 'FOUND'
+            else:
+                keymsg = 'MISSING'
+            msg = f'{keymsg} its corresponding IIM property'
+            print(msg)
+            append_line2file(msg, testresults_text_fp)
+            csvrow += keymsg + csvsep
+        else:
+            csvrow += 'NA' + csvsep
+        if 'etXMP' in ipmdprop:
+            ettag = ipmdprop['etXMP']
+            if ettag in ipmdtest:
+                keymsg = 'FOUND'
+            else:
+                keymsg = 'MISSING'
+            msg = f'{keymsg} its corresponding XMP property'
+            print(msg)
+            append_line2file(msg, testresults_text_fp)
+            csvrow += keymsg + csvsep
+        else:
+            csvrow += 'NA' + csvsep
+        append_line2file(csvrow, testresults_csv_fp)
+
+

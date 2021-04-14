@@ -1,0 +1,21 @@
+#
+Tested JSON file: ../files/cache/test2/_test2_example1.json
+CHANGED value of property <File Name> is: _test2_example1.jpg
+CHANGED value of property <Keywords (IIM)> is: Keyword1test2example1
+CHANGED value of property <Keywords (IIM)> is: Keyword2test2example1
+CHANGED value of property <Keywords (IIM)> is: Keyword3test2example1
+CHANGED value of property <Description (IIM)> is: description/caption has been changed
+CHANGED value of property <Description (XMP)> is: description/caption has been changed
+CHANGED value of property <Keywords (XMP)> is: Keyword1test2example1
+CHANGED value of property <Keywords (XMP)> is: Keyword2test2example1
+CHANGED value of property <Keywords (XMP)> is: Keyword3test2example1
+CHANGED value of property <Image Creator (XMP)[0]->Id (XMP) > is: Image Creator Id 1 (test2-example1)
+CHANGED value of property <Image Creator (XMP)[0]->Name (XMP) > is: Image Creator Name 1 (test2-example1)
+CHANGED value of property <Rights Usage Terms (XMP)> is: Rights Usage Termns modiefied by test2-example1
+CHANGED value of property <Web Statement of Rights (XMP)> is: http://www.WebStatementOfRights.org/test2-example1
+Tested JSON file: ../files/cache/test3/_testimg_benchSnow1t2.json
+Tested JSON file: ../files/cache/test3/_testimg_benchSnow1t2.json
+COMMENT in the file: Removed PMD: Copyright Notice
+MISSING property: Copyright Notice (Exif)
+MISSING property: Copyright Notice (IIM)
+MISSING property: Copyright Notice (XMP)

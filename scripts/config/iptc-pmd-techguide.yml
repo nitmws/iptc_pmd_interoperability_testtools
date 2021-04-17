@@ -4,7 +4,7 @@
 #   see: https://www.iptc.org/std/photometadata/specification/IPTC-PhotoMetadata
 # Covered IPTC Photo Metadata Standard: version 2019.1
 #
-# This document was created on 2021-04-14 by MS
+# This document was created on 2021-04-17 by MS
 #
 # This document has two main regions:
 # * top level property names starting with ipmd_: they can be used for a processing based on the IPTC PMD standard
@@ -67,252 +67,282 @@
 # 3/ ... go to the iptc_struct sub-properties and search for this name.
 # 4/ In a few cases properties inside a structure have as datatype a structure. Do the same as in 2/
 #
+timestamp: '2021-04-17T15:24:47.906668+00:00'
 ipmd_top:
   cityName:
     label: City (legacy)
-    sortorder: go130
+    sortorder: tp130
     ugtopic: location
     specidx: '#city-legacy'
+    datatype: string
+    propoccurrence: single
     IIMid: 2:90
     IIMname: City
     XMPid: photoshop:City
-    datatype: string
     etXMP: XMP-photoshop:City
     etIIM: IPTC:City
   copyrightNotice:
     label: Copyright Notice
-    sortorder: go150
+    sortorder: tp150
     ugtopic: rights
     specidx: '#copyright-notice'
+    datatype: struct
+    dataformat: AltLang
+    propoccurrence: single
     IIMid: 2:116
     IIMname: Copyright Notice
     XMPid: dc:rights
-    datatype: AltLang
     etXMP: XMP-dc:Rights
     etIIM: IPTC:CopyrightNotice
     etIFD0: IFD0:Copyright
   countryName:
     label: Country (legacy)
-    sortorder: go170
+    sortorder: tp170
     ugtopic: location
     specidx: '#country-legacy'
+    datatype: string
+    propoccurrence: single
     IIMid: 2:101
     IIMname: Country/Primary Location Name
     XMPid: photoshop:Country
-    datatype: string
     etXMP: XMP-photoshop:Country
     etIIM: IPTC:Country-PrimaryLocationName
   countryCode:
     label: Country Code (legacy)
-    sortorder: go180
+    sortorder: tp180
     ugtopic: location
     specidx: '#country-code-legacy'
+    datatype: string
+    propoccurrence: single
     IIMid: 2:100
     IIMname: Country/Primary Location Code
     XMPid: Iptc4xmpCore:CountryCode
-    datatype: string
     etXMP: XMP-iptcCore:CountryCode
     etIIM: IPTC:Country-PrimaryLocationCode
   creatorNames:
     label: Creator
-    sortorder: go200
+    sortorder: tp200
     ugtopic: rights
     specidx: '#creator'
+    datatype: string
+    propoccurrence: multi
     IIMid: 2:80
     IIMname: By-line
     XMPid: dc:creator
-    datatype: string
     etXMP: XMP-dc:Creator
     etIIM: IPTC:By-line
     etIFD0: IFD0:Artist
   creatorContactInfo:
     label: Creator's Contact Info
-    sortorder: go210
+    sortorder: tp210
     ugtopic: rights
     specidx: '#creator''s-contact-info'
+    datatype: struct
+    dataformat: CreatorContactInfo
+    propoccurrence: single
     XMPid: Iptc4xmpCore:CreatorContactInfo
-    datatype: CreatorContactInfo
     etXMP: XMP-iptcCore:CreatorContactInfo
-    etIIM: IPTC:Contact
   jobtitle:
     label: Creator's jobtitle
-    sortorder: go220
+    sortorder: tp220
     ugtopic: rights
     specidx: '#creator''s-jobtitle'
+    datatype: string
+    propoccurrence: single
     IIMid: 2:85
     IIMname: By-line Title
     XMPid: photoshop:AuthorsPosition
-    datatype: string
     etXMP: XMP-photoshop:AuthorsPosition
     etIIM: IPTC:By-lineTitle
   creditLine:
     label: Credit Line
-    sortorder: go230
+    sortorder: tp230
     ugtopic: rights
     specidx: '#credit-line'
+    datatype: string
+    propoccurrence: single
     IIMid: 2:110
     IIMname: Credit
     XMPid: photoshop:Credit
-    datatype: string
     etXMP: XMP-photoshop:Credit
     etIIM: IPTC:Credit
   dateCreated:
     label: Date Created
-    sortorder: go250
+    sortorder: tp250
     ugtopic: admin
     specidx: '#date-created'
-    IIMid: '2:55'
-    IIMname: Date Created
-    XMPid: photoshop:DateCreated
     datatype: string
+    dataformat: date-time
+    propoccurrence: single
+    IIMid: '2:55'
+    IIMname: Date Created+2:60 Time Created
+    XMPid: photoshop:DateCreated
     etXMP: XMP-photoshop:DateCreated
     etIIM: IPTC:DateCreated+IPTC:TimeCreated
   description:
     label: Description
-    sortorder: go260
+    sortorder: tp260
     ugtopic: gimgcont
     specidx: '#description'
+    datatype: struct
+    dataformat: AltLang
+    propoccurrence: single
     IIMid: 2:120
     IIMname: Caption/Abstract
     XMPid: dc:description
-    datatype: AltLang
     etXMP: XMP-dc:Description
     etIIM: IPTC:Caption-Abstract
   captionWriter:
     label: Description Writer
-    sortorder: go270
+    sortorder: tp270
     ugtopic: admin
     specidx: '#description-writer'
+    datatype: string
+    propoccurrence: single
     IIMid: 2:122
     IIMname: Writer/Editor
     XMPid: photoshop:CaptionWriter
-    datatype: string
     etXMP: XMP-photoshop:CaptionWriter
     etIIM: IPTC:Writer-Editor
   headline:
     label: Headline
-    sortorder: go340
+    sortorder: tp340
     ugtopic: gimgcont
     specidx: '#headline'
+    datatype: struct
+    dataformat: AltLang
+    propoccurrence: single
     IIMid: 2:105
     IIMname: Headline
     XMPid: photoshop:Headline
-    datatype: AltLang
     etXMP: XMP-photoshop:Headline
     etIIM: IPTC:Headline
   instructions:
     label: Instructions
-    sortorder: go420
+    sortorder: tp420
     ugtopic: admin
     specidx: '#instructions'
+    datatype: string
+    propoccurrence: single
     IIMid: '2:40'
     IIMname: Special Instruction
     XMPid: photoshop:Instructions
-    datatype: string
     etXMP: XMP-photoshop:Instructions
     etIIM: IPTC:SpecialInstructions
   intellectualGenre:
     label: Intellectual Genre
-    sortorder: go430
+    sortorder: tp430
     ugtopic: gimgcont
     specidx: '#intellectual-genre'
+    datatype: string
+    propoccurrence: single
     IIMid: '2:04'
     IIMname: Object Attribute Reference
     XMPid: Iptc4xmpCore:IntellectualGenre
-    datatype: string
     etXMP: XMP-iptcCore:IntellectualGenre
     etIIM: IPTC:ObjectAttributeReference
   jobid:
     label: Job Id
-    sortorder: go440
+    sortorder: tp440
     ugtopic: admin
     specidx: '#job-id'
+    datatype: string
+    propoccurrence: single
     IIMid: 2:103
     IIMname: Original Transmission Reference
     XMPid: photoshop:TransmissionReference
-    datatype: string
     etXMP: XMP-photoshop:TransmissionReference
     etIIM: IPTC:OriginalTransmissionReference
   keywords:
     label: Keywords
-    sortorder: go450
+    sortorder: tp450
     ugtopic: gimgcont
     specidx: '#keywords'
+    datatype: string
+    propoccurrence: multi
     IIMid: '2:25'
     IIMname: Keywords
     XMPid: dc:subject
-    datatype: string
     etXMP: XMP-dc:Subject
     etIIM: IPTC:Keywords
   provinceState:
     label: Province or State (legacy)
-    sortorder: go640
+    sortorder: tp640
     ugtopic: location
     specidx: '#province-or-state-legacy'
+    datatype: string
+    propoccurrence: single
     IIMid: 2:95
     IIMname: Province/State
     XMPid: photoshop:State
-    datatype: string
     etXMP: XMP-photoshop:State
     etIIM: IPTC:Province-State
   usageTerms:
     label: Rights Usage Terms
-    sortorder: go650
+    sortorder: tp650
     ugtopic: licensing
     specidx: '#rights-usage-terms'
+    datatype: struct
+    dataformat: AltLang
+    propoccurrence: single
     XMPid: xmpRights:UsageTerms
-    datatype: AltLang
     etXMP: XMP-xmpRights:UsageTerms
   sceneCodes:
     label: Scene Code
-    sortorder: go660
+    sortorder: tp660
     ugtopic: gimgcont
     specidx: '#scene-code'
-    XMPid: Iptc4xmpCore:Scene
     datatype: string
+    propoccurrence: multi
+    XMPid: Iptc4xmpCore:Scene
     etXMP: XMP-iptcCore:Scene
   source:
     label: Source
-    sortorder: go670
+    sortorder: tp670
     ugtopic: rights
     specidx: '#source'
+    datatype: string
+    propoccurrence: single
     IIMid: 2:115
     IIMname: Source
     XMPid: photoshop:Source
-    datatype: string
     etXMP: XMP-photoshop:Source
     etIIM: IPTC:Source
   subjectCodes:
     label: Subject Code
-    sortorder: go680
+    sortorder: tp680
     ugtopic: gimgcont
     specidx: '#subject-code'
+    datatype: string
+    propoccurrence: multi
     IIMid: '2:12'
     IIMname: Subject Reference
     XMPid: Iptc4xmpCore:SubjectCode
-    datatype: string
     etXMP: XMP-iptcCore:SubjectCode
     etIIM: IPTC:SubjectReference
   sublocationName:
     label: Sublocation (legacy)
-    sortorder: go690
+    sortorder: tp690
     ugtopic: location
     specidx: '#sublocation-legacy'
+    datatype: string
+    propoccurrence: single
     IIMid: 2:92
     IIMname: Sublocation
     XMPid: Iptc4xmpCore:Location
-    datatype: string
     etXMP: XMP-iptcCore:Location
     etIIM: IPTC:Sub-location
   title:
     label: Title
-    sortorder: go710
+    sortorder: tp710
     ugtopic: admin
     specidx: '#title'
+    datatype: struct
+    dataformat: AltLang
+    propoccurrence: single
     IIMid: '2:05'
     IIMname: Object Name
     XMPid: dc:title
-    datatype: AltLang
     etXMP: XMP-dc:Title
     etIIM: IPTC:ObjectName
   eventName:
@@ -320,797 +350,1119 @@ ipmd_top:
     sortorder: g320
     ugtopic: othings
     specidx: '#event'
+    datatype: struct
+    dataformat: AltLang
+    propoccurrence: single
     XMPid: Iptc4xmpExt:Event
-    datatype: AltLang
     etXMP: XMP-iptcExt:Event
   additionalModelInfo:
     label: Additional Model Information
-    sortorder: go110
+    sortorder: tp110
     ugtopic: person
     specidx: '#additional-model-information'
-    XMPid: Iptc4xmpExt:AddlModelInfo
     datatype: string
+    propoccurrence: single
+    XMPid: Iptc4xmpExt:AddlModelInfo
     etXMP: XMP-iptcExt:AdditionalModelInformation
   artworkOrObjects:
     label: Artwork or Object in the Image
-    sortorder: go120
+    sortorder: tp120
     ugtopic: othings
     specidx: '#artwork-or-object-in-the-image'
+    datatype: struct
+    dataformat: ArtworkOrObject
+    propoccurrence: multi
     XMPid: Iptc4xmpExt:ArtworkOrObject
-    datatype: ArtworkOrObject
     etXMP: XMP-iptcExt:ArtworkOrObject
   organisationInImageCodes:
     label: Code of Organisation Featured in the Image
-    sortorder: go140
+    sortorder: tp140
     ugtopic: othings
     specidx: '#code-of-organisation-featured-in-the-image'
-    XMPid: Iptc4xmpExt:OrganisationInImageCode
     datatype: string
+    propoccurrence: multi
+    XMPid: Iptc4xmpExt:OrganisationInImageCode
     etXMP: XMP-iptcExt:OrganisationInImageCode
   copyrightOwners:
     label: Copyright Owner
-    sortorder: go160
+    sortorder: tp160
     ugtopic: rights
     specidx: '#copyright-owner'
+    datatype: struct
+    dataformat: CopyrightOwner
+    propoccurrence: single
     XMPid: plus:CopyrightOwner
-    datatype: Entity
     etXMP: XMP-plus:CopyrightOwner
   aboutCvTerms:
     label: CV-Term About Image
-    sortorder: go240
+    sortorder: tp240
     ugtopic: gimgcont
     specidx: '#cv-term-about-image'
+    datatype: struct
+    dataformat: CvTerm
+    propoccurrence: multi
     XMPid: Iptc4xmpExt:AboutCvTerm
-    datatype: CvTerm
     etXMP: XMP-iptcExt:AboutCvTerm
   digitalImageGuid:
     label: Digital Image GUID
-    sortorder: go280
+    sortorder: tp280
     ugtopic: admin
     specidx: '#digital-image-guid'
-    XMPid: Iptc4xmpExt:DigImageGUID
     datatype: string
+    propoccurrence: single
+    XMPid: Iptc4xmpExt:DigImageGUID
     etXMP: XMP-iptcExt:DigitalImageGUID
   digitalSourceType:
     label: Digital Source Type
-    sortorder: go290
+    sortorder: tp290
     ugtopic: admin
     specidx: '#digital-source-type'
-    XMPid: Iptc4xmpExt:DigitalSourceType
     datatype: string
+    dataformat: uri
+    propoccurrence: single
+    XMPid: Iptc4xmpExt:DigitalSourceType
     etXMP: XMP-iptcExt:DigitalSourceType
   embdEncRightsExprs:
     label: Embedded Encoded Rights Expression
-    sortorder: go310
+    sortorder: tp310
     ugtopic: licensing
     specidx: '#embedded-encoded-rights-expression'
+    datatype: struct
+    dataformat: EmbdEncRightsExpr
+    propoccurrence: multi
     XMPid: Iptc4xmpExt:EmbdEncRightsExpr
-    datatype: EmbdEncRightsExpr
     etXMP: XMP-iptcExt:EmbdEncRightsExpr
   genres:
     label: Genre
-    sortorder: go330
+    sortorder: tp330
     ugtopic: gimgcont
     specidx: '#genre'
+    datatype: struct
+    dataformat: CvTerm
+    propoccurrence: multi
     XMPid: Iptc4xmpExt:Genre
-    datatype: CvTerm
     etXMP: XMP-iptcExt:Genre
   imageCreators:
     label: Image Creator
-    sortorder: go350
+    sortorder: tp350
     ugtopic: rights
     specidx: '#image-creator'
+    datatype: struct
+    dataformat: ImageCreator
+    propoccurrence: single
     XMPid: plus:ImageCreator
-    datatype: Entity
     etXMP: XMP-plus:ImageCreator
   imageRating:
     label: Image Rating
-    sortorder: go360
+    sortorder: tp360
     ugtopic: gimgcont
     specidx: '#image-rating'
-    XMPid: xmp:Rating
     datatype: number
+    propoccurrence: single
+    XMPid: xmp:Rating
     etXMP: XMP-xmp:Rating
   imageRegion:
     label: Image Region
-    sortorder: go370
+    sortorder: tp370
     ugtopic: imgreg
     specidx: '#image-region'
+    datatype: struct
+    dataformat: ImageRegion
+    propoccurrence: multi
     XMPid: Iptc4xmpExt:ImageRegion
-    datatype: ImageRegion
     etXMP: XMP-iptcExt:ImageRegion
   registryEntries:
     label: Image Registry Entry
-    sortorder: go380
+    sortorder: tp380
     ugtopic: admin
     specidx: '#image-registry-entry'
+    datatype: struct
+    dataformat: RegistryEntry
+    propoccurrence: multi
     XMPid: Iptc4xmpExt:RegistryId
-    datatype: RegistryEntry
     etXMP: XMP-iptcExt:RegistryID
   suppliers:
     label: Image Supplier
-    sortorder: go390
+    sortorder: tp390
     ugtopic: licensing
     specidx: '#image-supplier'
+    datatype: struct
+    dataformat: ImageSupplier
+    propoccurrence: single
     XMPid: plus:ImageSupplier
-    datatype: Entity
     etXMP: XMP-plus:ImageSupplier
   imageSupplierImageId:
     label: Image Supplier Image ID
-    sortorder: go400
+    sortorder: tp400
     ugtopic: licensing
     specidx: '#image-supplier-image-id'
-    XMPid: plus:ImageSupplierImageID
     datatype: string
+    propoccurrence: single
+    XMPid: plus:ImageSupplierImageID
     etXMP: XMP-plus:ImageSupplierImageID
   licensors:
     label: Licensor
-    sortorder: go460
+    sortorder: tp460
     ugtopic: licensing
     specidx: '#licensor'
+    datatype: struct
+    dataformat: Licensor
+    propoccurrence: single
     XMPid: plus:Licensor
-    datatype: Entity
     etXMP: XMP-plus:Licensor
   linkedEncRightsExprs:
     label: Linked  Encoded Rights Expression
-    sortorder: go470
+    sortorder: tp470
     ugtopic: licensing
     specidx: '#linked--encoded-rights-expression'
+    datatype: struct
+    dataformat: LinkedEncRightsExpr
+    propoccurrence: multi
     XMPid: Iptc4xmpExt:LinkedEncRightsExpr
-    datatype: LinkedEncRightsExpr
     etXMP: XMP-iptcExt:LinkedEncRightsExpr
   locationCreated:
     label: Location created
-    sortorder: go480
+    sortorder: tp480
     ugtopic: location
     specidx: '#location-created'
+    datatype: struct
+    dataformat: Location
+    propoccurrence: single
     XMPid: Iptc4xmpExt:LocationCreated
-    datatype: Location
     etXMP: XMP-iptcExt:LocationCreated
   locationsShown:
     label: Location Shown in the Image
-    sortorder: go490
+    sortorder: tp490
     ugtopic: location
     specidx: '#location-shown-in-the-image'
+    datatype: struct
+    dataformat: Location
+    propoccurrence: multi
     XMPid: Iptc4xmpExt:LocationShown
-    datatype: Location
     etXMP: XMP-iptcExt:LocationShown
   maxAvailHeight:
     label: Max Avail Height
-    sortorder: go510
+    sortorder: tp510
     ugtopic: admin
     specidx: '#max-avail-height'
-    XMPid: Iptc4xmpExt:MaxAvailHeight
     datatype: number
+    dataformat: integer
+    propoccurrence: single
+    XMPid: Iptc4xmpExt:MaxAvailHeight
     etXMP: XMP-iptcExt:MaxAvailHeight
   maxAvailWidth:
     label: Max Avail Width
-    sortorder: go520
+    sortorder: tp520
     ugtopic: admin
     specidx: '#max-avail-width'
-    XMPid: Iptc4xmpExt:MaxAvailWidth
     datatype: number
+    dataformat: integer
+    propoccurrence: single
+    XMPid: Iptc4xmpExt:MaxAvailWidth
     etXMP: XMP-iptcExt:MaxAvailWidth
   minorModelAgeDisclosure:
     label: Minor Model Age Disclosure
-    sortorder: go530
+    sortorder: tp530
     ugtopic: person
     specidx: '#minor-model-age-disclosure'
-    XMPid: plus:MinorModelAgeDisclosure
     datatype: string
+    dataformat: uri
+    propoccurrence: single
+    XMPid: plus:MinorModelAgeDisclosure
     etXMP: XMP-plus:MinorModelAgeDisclosure
   modelAges:
     label: Model Age
-    sortorder: go540
+    sortorder: tp540
     ugtopic: person
     specidx: '#model-age'
-    XMPid: Iptc4xmpExt:ModelAge
     datatype: number
+    dataformat: integer
+    propoccurrence: multi
+    XMPid: Iptc4xmpExt:ModelAge
     etXMP: XMP-iptcExt:ModelAge
   modelReleaseDocuments:
     label: Model Release Id
-    sortorder: go550
+    sortorder: tp550
     ugtopic: person
     specidx: '#model-release-id'
-    XMPid: plus:ModelReleaseID
     datatype: string
+    propoccurrence: multi
+    XMPid: plus:ModelReleaseID
     etXMP: XMP-plus:ModelReleaseID
   modelReleaseStatus:
     label: Model Release Status
-    sortorder: go560
+    sortorder: tp560
     ugtopic: person
     specidx: '#model-release-status'
-    XMPid: plus:ModelReleaseStatus
     datatype: string
+    dataformat: uri
+    propoccurrence: single
+    XMPid: plus:ModelReleaseStatus
     etXMP: XMP-plus:ModelReleaseStatus
   organisationInImageNames:
     label: Name of Organisation Featured in the Image
-    sortorder: go570
+    sortorder: tp570
     ugtopic: othings
     specidx: '#name-of-organisation-featured-in-the-image'
-    XMPid: Iptc4xmpExt:OrganisationInImageName
     datatype: string
+    propoccurrence: multi
+    XMPid: Iptc4xmpExt:OrganisationInImageName
     etXMP: XMP-iptcExt:OrganisationInImageName
   personInImageNames:
     label: Person Shown in the Image
-    sortorder: go580
+    sortorder: tp580
     ugtopic: person
     specidx: '#person-shown-in-the-image'
-    XMPid: Iptc4xmpExt:PersonInImage
     datatype: string
+    propoccurrence: multi
+    XMPid: Iptc4xmpExt:PersonInImage
     etXMP: XMP-iptcExt:PersonInImage
   personsShown:
     label: Person Shown in the Image with Details
-    sortorder: go590
+    sortorder: tp590
     ugtopic: person
     specidx: '#person-shown-in-the-image-with-details'
+    datatype: struct
+    dataformat: PersonWDetails
+    propoccurrence: multi
     XMPid: Iptc4xmpExt:PersonInImageWDetails
-    datatype: PersonWDetails
     etXMP: XMP-iptcExt:PersonInImageWDetails
   productsShown:
     label: Product Shown in the Image
-    sortorder: go610
+    sortorder: tp610
     ugtopic: othings
     specidx: '#product-shown-in-the-image'
+    datatype: struct
+    dataformat: ProductWGtin
+    propoccurrence: multi
     XMPid: Iptc4xmpExt:ProductInImage
-    datatype: ProductWGtin
     etXMP: XMP-iptcExt:ProductInImage
   propertyReleaseDocuments:
     label: Property Release Id
-    sortorder: go620
+    sortorder: tp620
     ugtopic: rights
     specidx: '#property-release-id'
-    XMPid: plus:PropertyReleaseID
     datatype: string
+    propoccurrence: multi
+    XMPid: plus:PropertyReleaseID
     etXMP: XMP-plus:PropertyReleaseID
   propertyReleaseStatus:
     label: Property Release Status
-    sortorder: go630
+    sortorder: tp630
     ugtopic: rights
     specidx: '#property-release-status'
-    XMPid: plus:PropertyReleaseStatus
     datatype: string
+    dataformat: uri
+    propoccurrence: single
+    XMPid: plus:PropertyReleaseStatus
     etXMP: XMP-plus:PropertyReleaseStatus
   webstatementRights:
     label: Web Statement of Rights
-    sortorder: go720
+    sortorder: tp720
     ugtopic: rights
     specidx: '#web-statement-of-rights'
-    XMPid: xmpRights:WebStatement
     datatype: string
+    dataformat: uri
+    propoccurrence: single
+    XMPid: xmpRights:WebStatement
     etXMP: XMP-xmpRights:WebStatement
 ipmd_struct:
   CreatorContactInfo:
     address:
       label: Address
-      sortorder: gos0101
+      sortorder: s0101
       specidx: '#address'
-      XMPid: Iptc4xmpCore:CiAdrExtadr
       datatype: string
+      propoccurrence: single
+      XMPid: Iptc4xmpCore:CiAdrExtadr
       etTag: CiAdrExtadr
     city:
       label: City
-      sortorder: gos0102
+      sortorder: s0102
       specidx: '#city'
-      XMPid: Iptc4xmpCore:CiAdrCity
       datatype: string
+      propoccurrence: single
+      XMPid: Iptc4xmpCore:CiAdrCity
       etTag: CiAdrCity
     country:
       label: Country
-      sortorder: gos0103
+      sortorder: s0103
       specidx: '#country'
-      XMPid: Iptc4xmpCore:CiAdrCtry
       datatype: string
+      propoccurrence: single
+      XMPid: Iptc4xmpCore:CiAdrCtry
       etTag: CiAdrCtry
     emailwork:
       label: Email address(es)
-      sortorder: gos0104
+      sortorder: s0104
       specidx: '#email-addresses'
-      XMPid: Iptc4xmpCore:CiEmailWork
       datatype: string
+      propoccurrence: single
+      XMPid: Iptc4xmpCore:CiEmailWork
       etTag: CiEmailWork
     phonework:
       label: Phone number(s)
-      sortorder: gos0105
+      sortorder: s0105
       specidx: '#phone-numbers'
-      XMPid: Iptc4xmpCore:CiTelWork
       datatype: string
+      propoccurrence: single
+      XMPid: Iptc4xmpCore:CiTelWork
       etTag: CiTelWork
     postalCode:
       label: Postal Code
-      sortorder: gos0106
+      sortorder: s0106
       specidx: '#postal-code'
-      XMPid: Iptc4xmpCore:CiAdrPcode
       datatype: string
+      propoccurrence: single
+      XMPid: Iptc4xmpCore:CiAdrPcode
       etTag: CiAdrPcode
     region:
       label: State/Province
-      sortorder: gos0107
+      sortorder: s0107
       specidx: '#state/province'
-      XMPid: Iptc4xmpCore:CiAdrRegion
       datatype: string
+      propoccurrence: single
+      XMPid: Iptc4xmpCore:CiAdrRegion
       etTag: CiAdrRegion
     weburlwork:
       label: Web URL(s)
-      sortorder: gos0108
+      sortorder: s0108
       specidx: '#web-urls'
-      XMPid: Iptc4xmpCore:CiUrlWork
       datatype: string
+      dataformat: url
+      propoccurrence: single
+      XMPid: Iptc4xmpCore:CiUrlWork
       etTag: CiUrlWork
   ArtworkOrObject:
     circaDateCreated:
       label: Circa Date Created
-      sortorder: gos0201
+      sortorder: s0201
       specidx: '#circa-date-created'
-      XMPid: Iptc4xmpExt:AOCircaDateCreated
       datatype: string
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:AOCircaDateCreated
       etTag: AOCircaDateCreated
     contentDescription:
       label: Content Description
-      sortorder: gos0202
+      sortorder: s0202
       specidx: '#content-description'
+      datatype: struct
+      dataformat: AltLang
+      propoccurrence: single
       XMPid: Iptc4xmpExt:AOContentDescription
-      datatype: AltLang
       etTag: AOContentDescription
     contributionDescription:
       label: Contribution Description
-      sortorder: gos0203
+      sortorder: s0203
       specidx: '#contribution-description'
+      datatype: struct
+      dataformat: AltLang
+      propoccurrence: single
       XMPid: Iptc4xmpExt:AOContributionDescription
-      datatype: AltLang
       etTag: AOContributionDescription
     copyrightNotice:
       label: Copyright Notice
-      sortorder: gos0204
+      sortorder: s0204
       specidx: '#copyright-notice'
+      datatype: struct
+      dataformat: AltLang
+      propoccurrence: single
       XMPid: Iptc4xmpExt:AOCopyrightNotice
-      datatype: AltLang
       etTag: AOCopyrightNotice
     creatorNames:
       label: Creator
-      sortorder: gos0205
+      sortorder: s0205
       specidx: '#creator'
-      XMPid: Iptc4xmpExt:AOCreator
       datatype: string
+      propoccurrence: multi
+      XMPid: Iptc4xmpExt:AOCreator
       etTag: AOCreator
     creatorIdentifiers:
       label: Creator ID
-      sortorder: gos0206
+      sortorder: s0206
       specidx: '#creator-id'
-      XMPid: Iptc4xmpExt:AOCreatorId
       datatype: string
+      dataformat: uri
+      propoccurrence: multi
+      XMPid: Iptc4xmpExt:AOCreatorId
       etTag: AOCreatorId
     currentCopyrightOwnerIdentifier:
       label: Current Copyright Owner ID
-      sortorder: gos0207
+      sortorder: s0207
       specidx: '#current-copyright-owner-id'
-      XMPid: Iptc4xmpExt:AOCurrentCopyrightOwnerId
       datatype: string
+      dataformat: uri
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:AOCurrentCopyrightOwnerId
       etTag: AOCurrentCopyrightOwnerId
     currentCopyrightOwnerName:
       label: Current Copyright Owner Name
-      sortorder: gos0208
+      sortorder: s0208
       specidx: '#current-copyright-owner-name'
-      XMPid: Iptc4xmpExt:AOCurrentCopyrightOwnerName
       datatype: string
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:AOCurrentCopyrightOwnerName
       etTag: AOCurrentCopyrightOwnerName
     currentLicensorIdentifier:
       label: Current Licensor ID
-      sortorder: gos0209
+      sortorder: s0209
       specidx: '#current-licensor-id'
-      XMPid: Iptc4xmpExt:AOCurrentLicensorId
       datatype: string
+      dataformat: uri
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:AOCurrentLicensorId
       etTag: AOCurrentLicensorId
     currentLicensorName:
       label: Current Licensor Name
-      sortorder: gos0210
+      sortorder: s0210
       specidx: '#current-licensor-name'
-      XMPid: Iptc4xmpExt:AOCurrentLicensorName
       datatype: string
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:AOCurrentLicensorName
       etTag: AOCurrentLicensorName
     dateCreated:
       label: Date Created
-      sortorder: gos0211
+      sortorder: s0211
       specidx: '#date-created'
-      XMPid: Iptc4xmpExt:AODateCreated
       datatype: string
+      dataformat: date-time
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:AODateCreated
       etTag: AODateCreated
     physicalDescription:
       label: Physical Description
-      sortorder: gos0212
+      sortorder: s0212
       specidx: '#physical-description'
+      datatype: struct
+      dataformat: AltLang
+      propoccurrence: single
       XMPid: Iptc4xmpExt:AOPhysicalDescription
-      datatype: AltLang
       etTag: AOPhysicalDescription
     source:
       label: Source
-      sortorder: gos02013
+      sortorder: s0213
       specidx: '#source'
-      XMPid: Iptc4xmpExt:AOSource
       datatype: string
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:AOSource
       etTag: AOSource
     sourceInventoryNr:
       label: Source Inventory Number
-      sortorder: gos0214
+      sortorder: s0214
       specidx: '#source-inventory-number'
-      XMPid: Iptc4xmpExt:AOSourceInvNo
       datatype: string
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:AOSourceInvNo
       etTag: AOSourceInvNo
     sourceInventoryUrl:
       label: Source Inventory URL
-      sortorder: gos0215
+      sortorder: s0215
       specidx: '#source-inventory-url'
-      XMPid: Iptc4xmpExt:AOSourceInvURL
       datatype: string
+      dataformat: uri
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:AOSourceInvURL
       etTag: AOSourceInvURL
     stylePeriod:
       label: Style Period
-      sortorder: gos0216
+      sortorder: s0216
       specidx: '#style-period'
-      XMPid: Iptc4xmpExt:AOStylePeriod
       datatype: string
+      propoccurrence: multi
+      XMPid: Iptc4xmpExt:AOStylePeriod
       etTag: AOStylePeriod
     title:
       label: Title
-      sortorder: gos0217
+      sortorder: s0217
       specidx: '#title'
+      datatype: struct
+      dataformat: AltLang
+      propoccurrence: single
       XMPid: Iptc4xmpExt:AOTitle
-      datatype: AltLang
       etTag: AOTitle
   CvTerm:
     cvId:
       label: CV-Term CV ID
-      sortorder: gos0301
+      sortorder: s0301
       specidx: '#cv-term-cv-id'
-      XMPid: Iptc4xmpExt:CvId
       datatype: string
+      dataformat: uri
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:CvId
       etTag: CvId
     cvTermId:
       label: CV-Term ID
-      sortorder: gos0302
+      sortorder: s0302
       specidx: '#cv-term-id'
-      XMPid: Iptc4xmpExt:CvTermId
       datatype: string
+      dataformat: uri
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:CvTermId
       etTag: CvTermId
     cvTermName:
       label: CV-Term name
-      sortorder: gos0303
+      sortorder: s0303
       specidx: '#cv-term-name'
+      datatype: struct
+      dataformat: AltLang
+      propoccurrence: single
       XMPid: Iptc4xmpExt:CvTermName
-      datatype: AltLang
       etTag: CvTermName
     cvTermRefinedAbout:
       label: Refined 'about' Relationship of the CV-Term
-      sortorder: gos0304
+      sortorder: s0304
       specidx: '#refined-''about''-relationship-of-the-cv-term'
-      XMPid: Iptc4xmpExt:CvTermRefinedAbout
       datatype: string
+      dataformat: uri
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:CvTermRefinedAbout
       etTag: CvTermRefinedAbout
   EmbdEncRightsExpr:
     rightsExprLangId:
       label: Encoded Rights Expression
-      sortorder: gos0401
+      sortorder: s0401
       specidx: '#encoded-rights-expression'
-      XMPid: Iptc4xmpExt:EncRightsExpr
       datatype: string
+      dataformat: uri
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:EncRightsExpr
       etTag: EncRightsExpr
     rightsExprEncType:
       label: Encoding type
-      sortorder: gos0402
+      sortorder: s0402
       specidx: '#encoding-type'
-      XMPid: Iptc4xmpExt:RightsExprEncType
       datatype: string
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:RightsExprEncType
       etTag: RightsExprEncType
     encRightsExpr:
       label: Rights Expression Language ID
-      sortorder: gos0403
+      sortorder: s0403
       specidx: '#rights-expression-language-id'
-      XMPid: Iptc4xmpExt:RightsExprLangId
       datatype: string
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:RightsExprLangId
       etTag: RightsExprLangId
   Entity:
     identifiers:
       label: Identifier
-      sortorder: gos0401
+      sortorder: s0401
       specidx: '#identifier'
-      XMPid: xmp:Identifier
       datatype: string
+      dataformat: uri
+      propoccurrence: multi
+      XMPid: xmp:Identifier
       etTag: Identifier
     name:
       label: Name
-      sortorder: gos0402
+      sortorder: s0402
       specidx: '#name'
+      datatype: struct
+      dataformat: AltLang
+      propoccurrence: single
       XMPid: Iptc4xmpExt:Name
-      datatype: AltLang
       etTag: Name
   ImageRegion:
     regionBoundary:
       label: Region Boundary
-      sortorder: gos0501
+      sortorder: s0501
       specidx: '#region-boundary'
+      datatype: struct
+      dataformat: RegionBoundary
+      propoccurrence: single
       XMPid: Iptc4xmpExt:RegionBoundary
-      datatype: RegionBoundary
       etTag: RegionBoundary
     rId:
       label: Region Identifier
-      sortorder: gos0502
+      sortorder: s0502
       specidx: '#region-identifier'
-      XMPid: Iptc4xmpExt:rId
       datatype: string
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:rId
       etTag: RiD
     name:
       label: Region Name
-      sortorder: gos0503
+      sortorder: s0503
       specidx: '#region-name'
+      datatype: struct
+      dataformat: AltLang
+      propoccurrence: single
       XMPid: Iptc4xmpExt:Name
-      datatype: AltLang
       etTag: Name
     rCtype:
       label: Region Content Type
-      sortorder: gos0504
+      sortorder: s0504
       specidx: '#region-content-type'
+      datatype: struct
+      dataformat: Entity
+      propoccurrence: multi
       XMPid: Iptc4xmpExt:rCtype
-      datatype: Entity
       etTag: RCtype
     rRole:
       label: Region Role
-      sortorder: gos0505
+      sortorder: s0505
       specidx: '#region-role'
+      datatype: struct
+      dataformat: Entity
+      propoccurrence: multi
       XMPid: Iptc4xmpExt:rRole
-      datatype: Entity
       etTag: RRole
     any:
       label: Other Metadata
-      sortorder: gos0506
+      sortorder: s0506
       specidx: '#other-metadata'
-      XMPid: any:any
       datatype: any
+      propoccurrence: single
+      XMPid: any:any
       etTag: '{any}'
   RegionBoundary:
     rbShape:
       label: Boundary Shape
-      sortorder: gos0601
+      sortorder: s0601
       specidx: '#boundary-shape'
-      XMPid: Iptc4xmpExt:rbShape
       datatype: string
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:rbShape
       etTag: RbShape
     rbUnit:
       label: Boundary Measuring Unit
-      sortorder: gos0602
+      sortorder: s0602
       specidx: '#boundary-measuring-unit'
-      XMPid: Iptc4xmpExt:rbUnit
       datatype: string
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:rbUnit
       etTag: RbUnit
     rbX:
       label: X-Axis Coordinate
-      sortorder: gos0603
+      sortorder: s0603
       specidx: '#x-axis-coordinate'
-      XMPid: Iptc4xmpExt:rbX
       datatype: number
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:rbX
       etTag: RbX
     rbY:
       label: Y-Axis Coordinate
-      sortorder: gos0604
+      sortorder: s0604
       specidx: '#y-axis-coordinate'
-      XMPid: Iptc4xmpExt:rbY
       datatype: number
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:rbY
       etTag: RbY
     rbW:
       label: Rectangle Width
-      sortorder: gos0605
+      sortorder: s0605
       specidx: '#rectangle-width'
-      XMPid: Iptc4xmpExt:rbW
       datatype: number
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:rbW
       etTag: RbW
     rbH:
       label: Rectangle Height
-      sortorder: gos0606
+      sortorder: s0606
       specidx: '#rectangle-height'
-      XMPid: Iptc4xmpExt:rbH
       datatype: number
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:rbH
       etTag: RbH
     rbRx:
       label: Circle Radius
-      sortorder: gos0607
+      sortorder: s0607
       specidx: '#circle-radius'
-      XMPid: Iptc4xmpExt:rbRx
       datatype: number
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:rbRx
       etTag: RbRx
     rbVertices:
       label: Polygon Vertices
-      sortorder: gos0608
+      sortorder: s0608
       specidx: '#polygon-vertices'
+      datatype: struct
+      dataformat: RegionBoundaryPoint
+      propoccurrence: multi
       XMPid: Iptc4xmpExt:rbVertices
-      datatype: RegionBoundaryPoint
       etTag: RbVertices
   RegionBoundaryPoint:
     rbX:
       label: X-Axis Coordinate
-      sortorder: gos0701
+      sortorder: s0701
       specidx: '#x-axis-coordinate'
-      XMPid: Iptc4xmpExt:rbX
       datatype: number
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:rbX
       etTag: RbX
     rbY:
       label: Y-Axis Coordinate
-      sortorder: gos0702
+      sortorder: s0702
       specidx: '#y-axis-coordinate'
-      XMPid: Iptc4xmpExt:rbY
       datatype: number
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:rbY
       etTag: RbY
   LinkedEncRightsExpr:
     rightsExprLangId:
       label: Encoding type
-      sortorder: gos0801
+      sortorder: s0801
       specidx: '#encoding-type'
-      XMPid: Iptc4xmpExt:RightsExprEncType
       datatype: string
+      dataformat: uri
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:RightsExprEncType
       etTag: RightsExprEncType
     rightsExprEncType:
       label: Link to Encoded Rights Expression
-      sortorder: gos0802
+      sortorder: s0802
       specidx: '#link-to-encoded-rights-expression'
-      XMPid: Iptc4xmpExt:LinkedRightsExpr
       datatype: string
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:LinkedRightsExpr
       etTag: LinkedRightsExpr
     linkedRightsExpr:
       label: Rights Expression Language ID
-      sortorder: gos0803
+      sortorder: s0803
       specidx: '#rights-expression-language-id'
-      XMPid: Iptc4xmpExt:RightsExprLangId
       datatype: string
+      dataformat: uri
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:RightsExprLangId
       etTag: RightsExprLangId
   Location:
     city:
       label: City
-      sortorder: gos0904
+      sortorder: s0904
       specidx: '#city'
+      datatype: struct
+      dataformat: AltLang
+      propoccurrence: single
       XMPid: Iptc4xmpExt:City
-      datatype: AltLang
       etTag: City
     countryCode:
       label: Country ISO-Code
-      sortorder: gos0907
+      sortorder: s0907
       specidx: '#country-iso-code'
-      XMPid: Iptc4xmpExt:CountryCode
       datatype: string
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:CountryCode
       etTag: CountryCode
     countryName:
       label: Country Name
-      sortorder: gos0906
+      sortorder: s0906
       specidx: '#country-name'
+      datatype: struct
+      dataformat: AltLang
+      propoccurrence: single
       XMPid: Iptc4xmpExt:CountryName
-      datatype: AltLang
       etTag: CountryName
     gpsAltitude:
       label: GPS-Altitude
-      sortorder: gos0911
+      sortorder: s0911
       specidx: '#gps-altitude'
-      XMPid: exif:GPSAltitude
       datatype: number
+      propoccurrence: single
+      XMPid: exif:GPSAltitude
       etTag: NA
     gpsLatitude:
       label: GPS-Latitude
-      sortorder: gos0912
+      sortorder: s0912
       specidx: '#gps-latitude'
-      XMPid: exif:GPSLatitude
       datatype: number
+      propoccurrence: single
+      XMPid: exif:GPSLatitude
       etTag: NA
     gpsLongitude:
       label: GPS-Longitude
-      sortorder: gos0913
+      sortorder: s0913
       specidx: '#gps-longitude'
-      XMPid: exif:GPSLongitude
       datatype: number
+      propoccurrence: single
+      XMPid: exif:GPSLongitude
       etTag: NA
     identifiers:
       label: Location Identifier
-      sortorder: gos0901
+      sortorder: s0901
       specidx: '#location-identifier'
-      XMPid: Iptc4xmpExt:LocationId
       datatype: string
+      dataformat: uri
+      propoccurrence: multi
+      XMPid: Iptc4xmpExt:LocationId
       etTag: LocationId
     name:
       label: Location Name
-      sortorder: gos0902
+      sortorder: s0902
       specidx: '#location-name'
+      datatype: struct
+      dataformat: AltLang
+      propoccurrence: single
       XMPid: Iptc4xmpExt:LocationName
-      datatype: AltLang
       etTag: LocationName
     provinceState:
       label: Province or State
-      sortorder: gos0905
+      sortorder: s0905
       specidx: '#province-or-state'
+      datatype: struct
+      dataformat: AltLang
+      propoccurrence: single
       XMPid: Iptc4xmpExt:ProvinceState
-      datatype: AltLang
       etTag: ProvinceState
     sublocation:
       label: Sublocation
-      sortorder: gos0903
+      sortorder: s0903
       specidx: '#sublocation'
+      datatype: struct
+      dataformat: AltLang
+      propoccurrence: single
       XMPid: Iptc4xmpExt:Sublocation
-      datatype: AltLang
       etTag: Sublocation
     worldRegion:
       label: World Region
-      sortorder: gos0908
+      sortorder: s0908
       specidx: '#world-region'
+      datatype: struct
+      dataformat: AltLang
+      propoccurrence: single
       XMPid: Iptc4xmpExt:WorldRegion
-      datatype: AltLang
       etTag: WorldRegion
   PersonWDetails:
     characteristics:
       label: Characteristics
-      sortorder: gos1004
+      sortorder: s1004
       specidx: '#characteristics'
+      datatype: struct
+      dataformat: CvTerm
+      propoccurrence: multi
       XMPid: Iptc4xmpExt:PersonCharacteristic
-      datatype: CvTerm
       etTag: PersonCharacteristic
     description:
       label: Description
-      sortorder: gos1003
+      sortorder: s1003
       specidx: '#description'
+      datatype: struct
+      dataformat: AltLang
+      propoccurrence: single
       XMPid: Iptc4xmpExt:PersonDescription
-      datatype: AltLang
       etTag: PersonDescription
     identifiers:
       label: Identifier
-      sortorder: gos1001
+      sortorder: s1001
       specidx: '#identifier'
-      XMPid: Iptc4xmpExt:PersonId
       datatype: string
+      dataformat: uri
+      propoccurrence: multi
+      XMPid: Iptc4xmpExt:PersonId
       etTag: PersonId
     name:
       label: Name
-      sortorder: gos1002
+      sortorder: s1002
       specidx: '#name'
+      datatype: struct
+      dataformat: AltLang
+      propoccurrence: single
       XMPid: Iptc4xmpExt:PersonName
-      datatype: AltLang
       etTag: PersonName
   ProductWGtin:
     description:
       label: Description
-      sortorder: gos1103
+      sortorder: s1103
       specidx: '#description'
+      datatype: struct
+      dataformat: AltLang
+      propoccurrence: single
       XMPid: Iptc4xmpExt:ProductDescription
-      datatype: AltLang
       etTag: ProductDescription
     gtin:
       label: GTIN
-      sortorder: gos1101
+      sortorder: s1101
       specidx: '#gtin'
-      XMPid: Iptc4xmpExt:ProductGTIN
       datatype: string
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:ProductGTIN
       etTag: ProductGTIN
     name:
       label: Name
-      sortorder: gos1102
+      sortorder: s1102
       specidx: '#name'
+      datatype: struct
+      dataformat: AltLang
+      propoccurrence: single
       XMPid: Iptc4xmpExt:ProductName
-      datatype: AltLang
       etTag: ProductName
   RegistryEntry:
     assetIdentifier:
       label: Item Id
-      sortorder: gos1202
+      sortorder: s1202
       specidx: '#item-id'
-      XMPid: Iptc4xmpExt:RegItemId
       datatype: string
+      dataformat: uri
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:RegItemId
       etTag: RegItemId
     registryIdentifier:
       label: Organisation Id
-      sortorder: gos1201
+      sortorder: s1201
       specidx: '#organisation-id'
-      XMPid: Iptc4xmpExt:RegOrgId
       datatype: string
+      dataformat: uri
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:RegOrgId
       etTag: RegOrgId
     role:
       label: Role
-      sortorder: gos1203
+      sortorder: s1203
       specidx: '#role'
-      XMPid: Iptc4xmpExt:RegEntryRole
       datatype: string
+      dataformat: uri
+      propoccurrence: single
+      XMPid: Iptc4xmpExt:RegEntryRole
       etTag: RegEntryRole
+  Licensor:
+    licensorId:
+      label: Licensor ID
+      sortorder: s3101
+      specidx: '#licensor-id'
+      datatype: string
+      propoccurrence: single
+      XMPid: plus:LicensorID
+      etTag: LicensorID
+    licensorName:
+      label: Licensor Name
+      sortorder: s3102
+      specidx: '#licensor-name'
+      datatype: string
+      propoccurrence: single
+      XMPid: plus:LicensorName
+      etTag: LicensorName
+    licensorAddress:
+      label: Licensor Address
+      sortorder: s3103
+      specidx: '#licensor-address'
+      datatype: string
+      propoccurrence: single
+      XMPid: plus:LicensorStreetAddress
+      etTag: LicensorStreetAddress
+    licensorAddressDetail:
+      label: Licensor Adress Detail
+      sortorder: s3104
+      specidx: '#licensor-adress-detail'
+      datatype: string
+      propoccurrence: single
+      XMPid: plus:LicensorExtendedAddress
+      etTag: LicensorExtendedAddress
+    licensorCity:
+      label: Licensor City
+      sortorder: s3105
+      specidx: '#licensor-city'
+      datatype: string
+      propoccurrence: single
+      XMPid: plus:LicensorCity
+      etTag: LicensorCity
+    licensorStateProvince:
+      label: Licensor State or Province
+      sortorder: s3106
+      specidx: '#licensor-state-or-province'
+      datatype: string
+      propoccurrence: single
+      XMPid: plus:LicensorRegion
+      etTag: LicensorRegion
+    licensorPostalCode:
+      label: Licensor Postal Code
+      sortorder: s3107
+      specidx: '#licensor-postal-code'
+      datatype: string
+      propoccurrence: single
+      XMPid: plus:LicensorPostalCode
+      etTag: LicensorPostalCode
+    licensorCountryName:
+      label: Licensor Country
+      sortorder: s3108
+      specidx: '#licensor-country'
+      datatype: string
+      propoccurrence: single
+      XMPid: plus:LicensorCountry
+      etTag: LicensorCountry
+    licensorTelephoneType1:
+      label: Licensor Telephone Type 1
+      sortorder: s3109
+      specidx: '#licensor-telephone-type-1'
+      datatype: string
+      dataformat: url
+      propoccurrence: single
+      XMPid: plus:LicensorTelephoneType1
+      etTag: LicensorTelephoneType1
+    licensorTelephone1:
+      label: Licensor Telephone 1
+      sortorder: s3110
+      specidx: '#licensor-telephone-1'
+      datatype: string
+      propoccurrence: single
+      XMPid: plus:LicensorTelephone1
+      etTag: LicensorTelephone1
+    licensorTelephoneType2:
+      label: Licensor Telephone Type 2
+      sortorder: s3111
+      specidx: '#licensor-telephone-type-2'
+      datatype: string
+      dataformat: url
+      propoccurrence: single
+      XMPid: plus:LicensorTelephoneType2
+      etTag: LicensorTelephoneType2
+    licensorTelephone2:
+      label: Licensor Telephone 2
+      sortorder: s3112
+      specidx: '#licensor-telephone-2'
+      datatype: string
+      propoccurrence: single
+      XMPid: plus:LicensorTelephone2
+      etTag: LicensorTelephone2
+    licensorEmail:
+      label: Licensor Email
+      sortorder: s3113
+      specidx: '#licensor-email'
+      datatype: string
+      propoccurrence: single
+      XMPid: plus:LicensorEmail
+      etTag: LicensorEmail
+    licensorUrl:
+      label: Licensor URL
+      sortorder: s3114
+      specidx: '#licensor-url'
+      datatype: string
+      dataformat: url
+      propoccurrence: single
+      XMPid: plus:LicensorURL
+      etTag: LicensorURL
+  CopyrightOwner:
+    copyrightOwnerId:
+      label: Copyright Owner ID
+      sortorder: s3201
+      specidx: '#copyright-owner-id'
+      datatype: string
+      propoccurrence: single
+      XMPid: plus:CopyrightOwnerID
+      etTag: CopyrightOwnerID
+    copyrightOwnerName:
+      label: Copyright Owner Name
+      sortorder: s3202
+      specidx: '#copyright-owner-name'
+      datatype: string
+      propoccurrence: single
+      XMPid: plus:CopyrightOwnerName
+      etTag: CopyrightOwnerName
+  ImageCreator:
+    imageCreatorId:
+      label: Image Creator ID
+      sortorder: s3301
+      specidx: '#image-creator-id'
+      datatype: string
+      propoccurrence: single
+      XMPid: plus:ImageCreatorID
+      etTag: ImageCreatorID
+    imageCreatorName:
+      label: Image Creator Name
+      sortorder: s3302
+      specidx: '#image-creator-name'
+      datatype: string
+      propoccurrence: single
+      XMPid: plus:ImageCreatorName
+      etTag: ImageCreatorName
   AltLang:
     Note: A special structure covering variants of a text in different languages.
     BCP47langid_1: Text in the human language corresponding to the BCP 47 language
@@ -1121,881 +1473,1321 @@ et_topwithprefix:
   xCommenttwpfx01: "Presets of properties outside the IPTC PMD Standard"
   ExifIFD_DateTimeOriginal:
     label: Date Created (Exif - DateTime Original)|Exif/IFD DateTimeOriginal
-    sortorder: so190z
+    sortorder: tp250z
     output: exif,admin
   XMP-x_XMPToolkit:
     label: XMP Toolkit Version (XMP)|XMP
-    sortorder: so910x
+    sortorder: tp910x
     output: any
   ExifTool_ExifToolVersion:
     label: Exiftool Version used by this system|NA (Exiftool Version)
-    sortorder: so810a
+    sortorder: tp810a
     output: any
   System_FileName:
     label: File Name|NA (File Name)
-    sortorder: so920x
+    sortorder: tp920x
     output: none
   xCommenttwpfx02: "END of static presets - APPEND et_topwithprefix.yml below"
   IPTC_City:
     label: City (legacy) (IIM)|IIM 2:90 City
-    sortorder: go130i
+    sortorder: tp130i
     specidx: '#city-legacy'
     output: iim,location
+    ipmdid: cityName
   XMP-photoshop_City:
     label: City (legacy) (XMP)|XMP photoshop:City
-    sortorder: go130x
+    sortorder: tp130x
     specidx: '#city-legacy'
     output: xmp,location
+    ipmdid: cityName
+    ipmddatatype: string
   IFD0_Copyright:
     label: Copyright Notice (Exif)|Exif XXX
-    sortorder: go150z
+    sortorder: tp150z
     output: exif,rights
+    ipmdid: copyrightNotice
+    ipmddatatype: AltLang
   IPTC_CopyrightNotice:
     label: Copyright Notice (IIM)|IIM 2:116 Copyright Notice
-    sortorder: go150i
+    sortorder: tp150i
     specidx: '#copyright-notice'
     output: iim,rights
+    ipmdid: copyrightNotice
   XMP-dc_Rights:
     label: Copyright Notice (XMP)|XMP dc:rights
-    sortorder: go150x
+    sortorder: tp150x
     specidx: '#copyright-notice'
     output: xmp,rights
+    ipmdid: copyrightNotice
+    ipmddatatype: AltLang
   IPTC_Country-PrimaryLocationName:
     label: Country (legacy) (IIM)|IIM 2:101 Country/Primary Location Name
-    sortorder: go170i
+    sortorder: tp170i
     specidx: '#country-legacy'
     output: iim,location
+    ipmdid: countryName
   XMP-photoshop_Country:
     label: Country (legacy) (XMP)|XMP photoshop:Country
-    sortorder: go170x
+    sortorder: tp170x
     specidx: '#country-legacy'
     output: xmp,location
+    ipmdid: countryName
+    ipmddatatype: string
   IPTC_Country-PrimaryLocationCode:
     label: Country Code (legacy) (IIM)|IIM 2:100 Country/Primary Location Code
-    sortorder: go180i
+    sortorder: tp180i
     specidx: '#country-code-legacy'
     output: iim,location
+    ipmdid: countryCode
   XMP-iptcCore_CountryCode:
     label: Country Code (legacy) (XMP)|XMP Iptc4xmpCore:CountryCode
-    sortorder: go180x
+    sortorder: tp180x
     specidx: '#country-code-legacy'
     output: xmp,location
+    ipmdid: countryCode
+    ipmddatatype: string
   IFD0_Artist:
     label: Creator (Exif)|Exif XXX
-    sortorder: go200z
+    sortorder: tp200z
     output: exif,rights
+    ipmdid: creatorNames
+    ipmddatatype: string
   IPTC_By-line:
     label: Creator (IIM)|IIM 2:80 By-line
-    sortorder: go200i
+    sortorder: tp200i
     specidx: '#creator'
     output: iim,rights
+    ipmdid: creatorNames
   XMP-dc_Creator:
     label: Creator (XMP)|XMP dc:creator
-    sortorder: go200x
+    sortorder: tp200x
     specidx: '#creator'
     output: xmp,rights
-  IPTC_Contact:
-    label: 'Creator''s Contact Info (IIM)|IIM '
-    sortorder: go210i
-    specidx: '#creator''s-contact-info'
-    output: iim,rights
+    ipmdid: creatorNames
+    ipmddatatype: string
   XMP-iptcCore_CreatorContactInfo:
     label: Creator's Contact Info (XMP)|XMP Iptc4xmpCore:CreatorContactInfo
-    sortorder: go210x
+    sortorder: tp210x
     specidx: '#creator''s-contact-info'
     output: xmp,rights
+    ipmdid: creatorContactInfo
+    ipmddatatype: CreatorContactInfo
   IPTC_By-lineTitle:
     label: Creator's jobtitle (IIM)|IIM 2:85 By-line Title
-    sortorder: go220i
+    sortorder: tp220i
     specidx: '#creator''s-jobtitle'
     output: iim,rights
+    ipmdid: jobtitle
   XMP-photoshop_AuthorsPosition:
     label: Creator's jobtitle (XMP)|XMP photoshop:AuthorsPosition
-    sortorder: go220x
+    sortorder: tp220x
     specidx: '#creator''s-jobtitle'
     output: xmp,rights
+    ipmdid: jobtitle
+    ipmddatatype: string
   IPTC_Credit:
     label: Credit Line (IIM)|IIM 2:110 Credit
-    sortorder: go230i
+    sortorder: tp230i
     specidx: '#credit-line'
     output: iim,rights
+    ipmdid: creditLine
   XMP-photoshop_Credit:
     label: Credit Line (XMP)|XMP photoshop:Credit
-    sortorder: go230x
+    sortorder: tp230x
     specidx: '#credit-line'
     output: xmp,rights
-  IPTC_DateCreated+IPTC_TimeCreated:
+    ipmdid: creditLine
+    ipmddatatype: string
+  IPTC_DateCreated:
     label: Date Created (IIM)|IIM 2:55 Date Created
-    sortorder: go250i
+    sortorder: tp250id
     specidx: '#date-created'
     output: iim,admin
+    ipmdid: dateCreated
+  IPTC_TimeCreated:
+    label: Time Created (IIM)|IIM 2:60 Time Created
+    sortorder: tp250it
+    specidx: '#date-created'
+    output: iim,admin
+    ipmdid: dateCreated
   XMP-photoshop_DateCreated:
     label: Date Created (XMP)|XMP photoshop:DateCreated
-    sortorder: go250x
+    sortorder: tp250x
     specidx: '#date-created'
     output: xmp,admin
+    ipmdid: dateCreated
+    ipmddatatype: string
   IPTC_Caption-Abstract:
     label: Description (IIM)|IIM 2:120 Caption/Abstract
-    sortorder: go260i
+    sortorder: tp260i
     specidx: '#description'
     output: iim,gimgcont
+    ipmdid: description
   XMP-dc_Description:
     label: Description (XMP)|XMP dc:description
-    sortorder: go260x
+    sortorder: tp260x
     specidx: '#description'
     output: xmp,gimgcont
+    ipmdid: description
+    ipmddatatype: AltLang
   IPTC_Writer-Editor:
     label: Description Writer (IIM)|IIM 2:122 Writer/Editor
-    sortorder: go270i
+    sortorder: tp270i
     specidx: '#description-writer'
     output: iim,admin
+    ipmdid: captionWriter
   XMP-photoshop_CaptionWriter:
     label: Description Writer (XMP)|XMP photoshop:CaptionWriter
-    sortorder: go270x
+    sortorder: tp270x
     specidx: '#description-writer'
     output: xmp,admin
+    ipmdid: captionWriter
+    ipmddatatype: string
   IPTC_Headline:
     label: Headline (IIM)|IIM 2:105 Headline
-    sortorder: go340i
+    sortorder: tp340i
     specidx: '#headline'
     output: iim,gimgcont
+    ipmdid: headline
   XMP-photoshop_Headline:
     label: Headline (XMP)|XMP photoshop:Headline
-    sortorder: go340x
+    sortorder: tp340x
     specidx: '#headline'
     output: xmp,gimgcont
+    ipmdid: headline
+    ipmddatatype: AltLang
   IPTC_SpecialInstructions:
     label: Instructions (IIM)|IIM 2:40 Special Instruction
-    sortorder: go420i
+    sortorder: tp420i
     specidx: '#instructions'
     output: iim,admin
+    ipmdid: instructions
   XMP-photoshop_Instructions:
     label: Instructions (XMP)|XMP photoshop:Instructions
-    sortorder: go420x
+    sortorder: tp420x
     specidx: '#instructions'
     output: xmp,admin
+    ipmdid: instructions
+    ipmddatatype: string
   IPTC_ObjectAttributeReference:
     label: Intellectual Genre (IIM)|IIM 2:04 Object Attribute Reference
-    sortorder: go430i
+    sortorder: tp430i
     specidx: '#intellectual-genre'
     output: iim,gimgcont
+    ipmdid: intellectualGenre
   XMP-iptcCore_IntellectualGenre:
     label: Intellectual Genre (XMP)|XMP Iptc4xmpCore:IntellectualGenre
-    sortorder: go430x
+    sortorder: tp430x
     specidx: '#intellectual-genre'
     output: xmp,gimgcont
+    ipmdid: intellectualGenre
+    ipmddatatype: string
   IPTC_OriginalTransmissionReference:
     label: Job Id (IIM)|IIM 2:103 Original Transmission Reference
-    sortorder: go440i
+    sortorder: tp440i
     specidx: '#job-id'
     output: iim,admin
+    ipmdid: jobid
   XMP-photoshop_TransmissionReference:
     label: Job Id (XMP)|XMP photoshop:TransmissionReference
-    sortorder: go440x
+    sortorder: tp440x
     specidx: '#job-id'
     output: xmp,admin
+    ipmdid: jobid
+    ipmddatatype: string
   IPTC_Keywords:
     label: Keywords (IIM)|IIM 2:25 Keywords
-    sortorder: go450i
+    sortorder: tp450i
     specidx: '#keywords'
     output: iim,gimgcont
+    ipmdid: keywords
   XMP-dc_Subject:
     label: Keywords (XMP)|XMP dc:subject
-    sortorder: go450x
+    sortorder: tp450x
     specidx: '#keywords'
     output: xmp,gimgcont
+    ipmdid: keywords
+    ipmddatatype: string
   IPTC_Province-State:
     label: Province or State (legacy) (IIM)|IIM 2:95 Province/State
-    sortorder: go640i
+    sortorder: tp640i
     specidx: '#province-or-state-legacy'
     output: iim,location
+    ipmdid: provinceState
   XMP-photoshop_State:
     label: Province or State (legacy) (XMP)|XMP photoshop:State
-    sortorder: go640x
+    sortorder: tp640x
     specidx: '#province-or-state-legacy'
     output: xmp,location
+    ipmdid: provinceState
+    ipmddatatype: string
   XMP-xmpRights_UsageTerms:
     label: Rights Usage Terms (XMP)|XMP xmpRights:UsageTerms
-    sortorder: go650x
+    sortorder: tp650x
     specidx: '#rights-usage-terms'
     output: xmp,licensing
+    ipmdid: usageTerms
+    ipmddatatype: AltLang
   XMP-iptcCore_Scene:
     label: Scene Code (XMP)|XMP Iptc4xmpCore:Scene
-    sortorder: go660x
+    sortorder: tp660x
     specidx: '#scene-code'
     output: xmp,gimgcont
+    ipmdid: sceneCodes
+    ipmddatatype: string
   IPTC_Source:
     label: Source (IIM)|IIM 2:115 Source
-    sortorder: go670i
+    sortorder: tp670i
     specidx: '#source'
     output: iim,rights
+    ipmdid: source
   XMP-photoshop_Source:
     label: Source (XMP)|XMP photoshop:Source
-    sortorder: go670x
+    sortorder: tp670x
     specidx: '#source'
     output: xmp,rights
+    ipmdid: source
+    ipmddatatype: string
   IPTC_SubjectReference:
     label: Subject Code (IIM)|IIM 2:12 Subject Reference
-    sortorder: go680i
+    sortorder: tp680i
     specidx: '#subject-code'
     output: iim,gimgcont
+    ipmdid: subjectCodes
   XMP-iptcCore_SubjectCode:
     label: Subject Code (XMP)|XMP Iptc4xmpCore:SubjectCode
-    sortorder: go680x
+    sortorder: tp680x
     specidx: '#subject-code'
     output: xmp,gimgcont
+    ipmdid: subjectCodes
+    ipmddatatype: string
   IPTC_Sub-location:
     label: Sublocation (legacy) (IIM)|IIM 2:92 Sublocation
-    sortorder: go690i
+    sortorder: tp690i
     specidx: '#sublocation-legacy'
     output: iim,location
+    ipmdid: sublocationName
   XMP-iptcCore_Location:
     label: Sublocation (legacy) (XMP)|XMP Iptc4xmpCore:Location
-    sortorder: go690x
+    sortorder: tp690x
     specidx: '#sublocation-legacy'
     output: xmp,location
+    ipmdid: sublocationName
+    ipmddatatype: string
   IPTC_ObjectName:
     label: Title (IIM)|IIM 2:05 Object Name
-    sortorder: go710i
+    sortorder: tp710i
     specidx: '#title'
     output: iim,admin
+    ipmdid: title
   XMP-dc_Title:
     label: Title (XMP)|XMP dc:title
-    sortorder: go710x
+    sortorder: tp710x
     specidx: '#title'
     output: xmp,admin
+    ipmdid: title
+    ipmddatatype: AltLang
   XMP-iptcExt_Event:
     label: Event (XMP)|XMP Iptc4xmpExt:Event
     sortorder: g320x
     specidx: '#event'
     output: xmp,othings
+    ipmdid: eventName
+    ipmddatatype: AltLang
   XMP-iptcExt_AdditionalModelInformation:
     label: Additional Model Information (XMP)|XMP Iptc4xmpExt:AddlModelInfo
-    sortorder: go110x
+    sortorder: tp110x
     specidx: '#additional-model-information'
     output: xmp,person
+    ipmdid: additionalModelInfo
+    ipmddatatype: string
   XMP-iptcExt_ArtworkOrObject:
     label: Artwork or Object in the Image (XMP)|XMP Iptc4xmpExt:ArtworkOrObject
-    sortorder: go120x
+    sortorder: tp120x
     specidx: '#artwork-or-object-in-the-image'
     output: xmp,othings
+    ipmdid: artworkOrObjects
+    ipmddatatype: ArtworkOrObject
   XMP-iptcExt_OrganisationInImageCode:
     label: Code of Organisation Featured in the Image (XMP)|XMP Iptc4xmpExt:OrganisationInImageCode
-    sortorder: go140x
+    sortorder: tp140x
     specidx: '#code-of-organisation-featured-in-the-image'
     output: xmp,othings
+    ipmdid: organisationInImageCodes
+    ipmddatatype: string
   XMP-plus_CopyrightOwner:
     label: Copyright Owner (XMP)|XMP plus:CopyrightOwner
-    sortorder: go160x
+    sortorder: tp160x
     specidx: '#copyright-owner'
     output: xmp,rights
+    ipmdid: copyrightOwners
+    ipmddatatype: CopyrightOwner
   XMP-iptcExt_AboutCvTerm:
     label: CV-Term About Image (XMP)|XMP Iptc4xmpExt:AboutCvTerm
-    sortorder: go240x
+    sortorder: tp240x
     specidx: '#cv-term-about-image'
     output: xmp,gimgcont
+    ipmdid: aboutCvTerms
+    ipmddatatype: CvTerm
   XMP-iptcExt_DigitalImageGUID:
     label: Digital Image GUID (XMP)|XMP Iptc4xmpExt:DigImageGUID
-    sortorder: go280x
+    sortorder: tp280x
     specidx: '#digital-image-guid'
     output: xmp,admin
+    ipmdid: digitalImageGuid
+    ipmddatatype: string
   XMP-iptcExt_DigitalSourceType:
     label: Digital Source Type (XMP)|XMP Iptc4xmpExt:DigitalSourceType
-    sortorder: go290x
+    sortorder: tp290x
     specidx: '#digital-source-type'
     output: xmp,admin
+    ipmdid: digitalSourceType
+    ipmddatatype: string
   XMP-iptcExt_EmbdEncRightsExpr:
     label: Embedded Encoded Rights Expression (XMP)|XMP Iptc4xmpExt:EmbdEncRightsExpr
-    sortorder: go310x
+    sortorder: tp310x
     specidx: '#embedded-encoded-rights-expression'
     output: xmp,licensing
+    ipmdid: embdEncRightsExprs
+    ipmddatatype: EmbdEncRightsExpr
   XMP-iptcExt_Genre:
     label: Genre (XMP)|XMP Iptc4xmpExt:Genre
-    sortorder: go330x
+    sortorder: tp330x
     specidx: '#genre'
     output: xmp,gimgcont
+    ipmdid: genres
+    ipmddatatype: CvTerm
   XMP-plus_ImageCreator:
     label: Image Creator (XMP)|XMP plus:ImageCreator
-    sortorder: go350x
+    sortorder: tp350x
     specidx: '#image-creator'
     output: xmp,rights
+    ipmdid: imageCreators
+    ipmddatatype: ImageCreator
   XMP-xmp_Rating:
     label: Image Rating (XMP)|XMP xmp:Rating
-    sortorder: go360x
+    sortorder: tp360x
     specidx: '#image-rating'
     output: xmp,gimgcont
+    ipmdid: imageRating
+    ipmddatatype: number
   XMP-iptcExt_ImageRegion:
     label: Image Region (XMP)|XMP Iptc4xmpExt:ImageRegion
-    sortorder: go370x
+    sortorder: tp370x
     specidx: '#image-region'
     output: xmp,imgreg
+    ipmdid: imageRegion
+    ipmddatatype: ImageRegion
   XMP-iptcExt_RegistryID:
     label: Image Registry Entry (XMP)|XMP Iptc4xmpExt:RegistryId
-    sortorder: go380x
+    sortorder: tp380x
     specidx: '#image-registry-entry'
     output: xmp,admin
+    ipmdid: registryEntries
+    ipmddatatype: RegistryEntry
   XMP-plus_ImageSupplier:
     label: Image Supplier (XMP)|XMP plus:ImageSupplier
-    sortorder: go390x
+    sortorder: tp390x
     specidx: '#image-supplier'
     output: xmp,licensing
+    ipmdid: suppliers
+    ipmddatatype: ImageSupplier
   XMP-plus_ImageSupplierImageID:
     label: Image Supplier Image ID (XMP)|XMP plus:ImageSupplierImageID
-    sortorder: go400x
+    sortorder: tp400x
     specidx: '#image-supplier-image-id'
     output: xmp,licensing
+    ipmdid: imageSupplierImageId
+    ipmddatatype: string
   XMP-plus_Licensor:
     label: Licensor (XMP)|XMP plus:Licensor
-    sortorder: go460x
+    sortorder: tp460x
     specidx: '#licensor'
     output: xmp,licensing
+    ipmdid: licensors
+    ipmddatatype: Licensor
   XMP-iptcExt_LinkedEncRightsExpr:
     label: Linked  Encoded Rights Expression (XMP)|XMP Iptc4xmpExt:LinkedEncRightsExpr
-    sortorder: go470x
+    sortorder: tp470x
     specidx: '#linked--encoded-rights-expression'
     output: xmp,licensing
+    ipmdid: linkedEncRightsExprs
+    ipmddatatype: LinkedEncRightsExpr
   XMP-iptcExt_LocationCreated:
     label: Location created (XMP)|XMP Iptc4xmpExt:LocationCreated
-    sortorder: go480x
+    sortorder: tp480x
     specidx: '#location-created'
     output: xmp,location
+    ipmdid: locationCreated
+    ipmddatatype: Location
   XMP-iptcExt_LocationShown:
     label: Location Shown in the Image (XMP)|XMP Iptc4xmpExt:LocationShown
-    sortorder: go490x
+    sortorder: tp490x
     specidx: '#location-shown-in-the-image'
     output: xmp,location
+    ipmdid: locationsShown
+    ipmddatatype: Location
   XMP-iptcExt_MaxAvailHeight:
     label: Max Avail Height (XMP)|XMP Iptc4xmpExt:MaxAvailHeight
-    sortorder: go510x
+    sortorder: tp510x
     specidx: '#max-avail-height'
     output: xmp,admin
+    ipmdid: maxAvailHeight
+    ipmddatatype: number
   XMP-iptcExt_MaxAvailWidth:
     label: Max Avail Width (XMP)|XMP Iptc4xmpExt:MaxAvailWidth
-    sortorder: go520x
+    sortorder: tp520x
     specidx: '#max-avail-width'
     output: xmp,admin
+    ipmdid: maxAvailWidth
+    ipmddatatype: number
   XMP-plus_MinorModelAgeDisclosure:
     label: Minor Model Age Disclosure (XMP)|XMP plus:MinorModelAgeDisclosure
-    sortorder: go530x
+    sortorder: tp530x
     specidx: '#minor-model-age-disclosure'
     output: xmp,person
+    ipmdid: minorModelAgeDisclosure
+    ipmddatatype: string
   XMP-iptcExt_ModelAge:
     label: Model Age (XMP)|XMP Iptc4xmpExt:ModelAge
-    sortorder: go540x
+    sortorder: tp540x
     specidx: '#model-age'
     output: xmp,person
+    ipmdid: modelAges
+    ipmddatatype: number
   XMP-plus_ModelReleaseID:
     label: Model Release Id (XMP)|XMP plus:ModelReleaseID
-    sortorder: go550x
+    sortorder: tp550x
     specidx: '#model-release-id'
     output: xmp,person
+    ipmdid: modelReleaseDocuments
+    ipmddatatype: string
   XMP-plus_ModelReleaseStatus:
     label: Model Release Status (XMP)|XMP plus:ModelReleaseStatus
-    sortorder: go560x
+    sortorder: tp560x
     specidx: '#model-release-status'
     output: xmp,person
+    ipmdid: modelReleaseStatus
+    ipmddatatype: string
   XMP-iptcExt_OrganisationInImageName:
     label: Name of Organisation Featured in the Image (XMP)|XMP Iptc4xmpExt:OrganisationInImageName
-    sortorder: go570x
+    sortorder: tp570x
     specidx: '#name-of-organisation-featured-in-the-image'
     output: xmp,othings
+    ipmdid: organisationInImageNames
+    ipmddatatype: string
   XMP-iptcExt_PersonInImage:
     label: Person Shown in the Image (XMP)|XMP Iptc4xmpExt:PersonInImage
-    sortorder: go580x
+    sortorder: tp580x
     specidx: '#person-shown-in-the-image'
     output: xmp,person
+    ipmdid: personInImageNames
+    ipmddatatype: string
   XMP-iptcExt_PersonInImageWDetails:
     label: Person Shown in the Image with Details (XMP)|XMP Iptc4xmpExt:PersonInImageWDetails
-    sortorder: go590x
+    sortorder: tp590x
     specidx: '#person-shown-in-the-image-with-details'
     output: xmp,person
+    ipmdid: personsShown
+    ipmddatatype: PersonWDetails
   XMP-iptcExt_ProductInImage:
     label: Product Shown in the Image (XMP)|XMP Iptc4xmpExt:ProductInImage
-    sortorder: go610x
+    sortorder: tp610x
     specidx: '#product-shown-in-the-image'
     output: xmp,othings
+    ipmdid: productsShown
+    ipmddatatype: ProductWGtin
   XMP-plus_PropertyReleaseID:
     label: Property Release Id (XMP)|XMP plus:PropertyReleaseID
-    sortorder: go620x
+    sortorder: tp620x
     specidx: '#property-release-id'
     output: xmp,rights
+    ipmdid: propertyReleaseDocuments
+    ipmddatatype: string
   XMP-plus_PropertyReleaseStatus:
     label: Property Release Status (XMP)|XMP plus:PropertyReleaseStatus
-    sortorder: go630x
+    sortorder: tp630x
     specidx: '#property-release-status'
     output: xmp,rights
+    ipmdid: propertyReleaseStatus
+    ipmddatatype: string
   XMP-xmpRights_WebStatement:
     label: Web Statement of Rights (XMP)|XMP xmpRights:WebStatement
-    sortorder: go720x
+    sortorder: tp720x
     specidx: '#web-statement-of-rights'
     output: xmp,rights
+    ipmdid: webstatementRights
+    ipmddatatype: string
 et_topnoprefix:
   City:
     label: City (legacy) (XMP)|XMP photoshop:City
-    sortorder: go130x
+    sortorder: tp130x
     specidx: '#city-legacy'
+    ipmdid: cityName
+    ipmddatatype: string
   Copyright:
     label: Copyright Notice (Exif)|Exif XXX
-    sortorder: go150z
+    sortorder: tp150z
+    ipmdid: copyrightNotice
+    ipmddatatype: AltLang
   CopyrightNotice:
     label: Copyright Notice (IIM)|IIM 2:116 Copyright Notice
-    sortorder: go150i
+    sortorder: tp150i
     specidx: '#copyright-notice'
+    ipmdid: copyrightNotice
   Rights:
     label: Copyright Notice (XMP)|XMP dc:rights
-    sortorder: go150x
+    sortorder: tp150x
     specidx: '#copyright-notice'
+    ipmdid: copyrightNotice
+    ipmddatatype: AltLang
   Country-PrimaryLocationName:
     label: Country (legacy) (IIM)|IIM 2:101 Country/Primary Location Name
-    sortorder: go170i
+    sortorder: tp170i
     specidx: '#country-legacy'
+    ipmdid: countryName
   Country:
     label: Country (legacy) (XMP)|XMP photoshop:Country
-    sortorder: go170x
+    sortorder: tp170x
     specidx: '#country-legacy'
+    ipmdid: countryName
+    ipmddatatype: string
   Country-PrimaryLocationCode:
     label: Country Code (legacy) (IIM)|IIM 2:100 Country/Primary Location Code
-    sortorder: go180i
+    sortorder: tp180i
     specidx: '#country-code-legacy'
+    ipmdid: countryCode
   CountryCode:
     label: Country Code (legacy) (XMP)|XMP Iptc4xmpCore:CountryCode
-    sortorder: go180x
+    sortorder: tp180x
     specidx: '#country-code-legacy'
+    ipmdid: countryCode
+    ipmddatatype: string
   Artist:
     label: Creator (Exif)|Exif XXX
-    sortorder: go200z
+    sortorder: tp200z
+    ipmdid: creatorNames
+    ipmddatatype: string
   By-line:
     label: Creator (IIM)|IIM 2:80 By-line
-    sortorder: go200i
+    sortorder: tp200i
     specidx: '#creator'
+    ipmdid: creatorNames
   Creator:
     label: Creator (XMP)|XMP dc:creator
-    sortorder: go200x
+    sortorder: tp200x
     specidx: '#creator'
-  Contact:
-    label: 'Creator''s Contact Info (IIM)|IIM '
-    sortorder: go210i
-    specidx: '#creator''s-contact-info'
+    ipmdid: creatorNames
+    ipmddatatype: string
   CreatorContactInfo:
     label: Creator's Contact Info (XMP)|XMP Iptc4xmpCore:CreatorContactInfo
-    sortorder: go210x
+    sortorder: tp210x
     specidx: '#creator''s-contact-info'
+    ipmdid: creatorContactInfo
+    ipmddatatype: CreatorContactInfo
   By-lineTitle:
     label: Creator's jobtitle (IIM)|IIM 2:85 By-line Title
-    sortorder: go220i
+    sortorder: tp220i
     specidx: '#creator''s-jobtitle'
+    ipmdid: jobtitle
   AuthorsPosition:
     label: Creator's jobtitle (XMP)|XMP photoshop:AuthorsPosition
-    sortorder: go220x
+    sortorder: tp220x
     specidx: '#creator''s-jobtitle'
+    ipmdid: jobtitle
+    ipmddatatype: string
   Credit:
     label: Credit Line (XMP)|XMP photoshop:Credit
-    sortorder: go230x
+    sortorder: tp230x
     specidx: '#credit-line'
-  DateCreated+IPTC:TimeCreated:
-    label: Date Created (IIM)|IIM 2:55 Date Created
-    sortorder: go250i
-    specidx: '#date-created'
+    ipmdid: creditLine
+    ipmddatatype: string
   DateCreated:
     label: Date Created (XMP)|XMP photoshop:DateCreated
-    sortorder: go250x
+    sortorder: tp250x
     specidx: '#date-created'
+    ipmdid: dateCreated
+    ipmddatatype: string
+  TimeCreated:
+    label: Time Created (IIM)|IIM 2:60 Time Created
+    sortorder: tp250it
+    specidx: '#date-created'
+    ipmdid: dateCreated
   Caption-Abstract:
     label: Description (IIM)|IIM 2:120 Caption/Abstract
-    sortorder: go260i
+    sortorder: tp260i
     specidx: '#description'
+    ipmdid: description
   Description:
     label: Description (XMP)|XMP dc:description
-    sortorder: go260x
+    sortorder: tp260x
     specidx: '#description'
+    ipmdid: description
+    ipmddatatype: AltLang
   Writer-Editor:
     label: Description Writer (IIM)|IIM 2:122 Writer/Editor
-    sortorder: go270i
+    sortorder: tp270i
     specidx: '#description-writer'
+    ipmdid: captionWriter
   CaptionWriter:
     label: Description Writer (XMP)|XMP photoshop:CaptionWriter
-    sortorder: go270x
+    sortorder: tp270x
     specidx: '#description-writer'
+    ipmdid: captionWriter
+    ipmddatatype: string
   Headline:
     label: Headline (XMP)|XMP photoshop:Headline
-    sortorder: go340x
+    sortorder: tp340x
     specidx: '#headline'
+    ipmdid: headline
+    ipmddatatype: AltLang
   SpecialInstructions:
     label: Instructions (IIM)|IIM 2:40 Special Instruction
-    sortorder: go420i
+    sortorder: tp420i
     specidx: '#instructions'
+    ipmdid: instructions
   Instructions:
     label: Instructions (XMP)|XMP photoshop:Instructions
-    sortorder: go420x
+    sortorder: tp420x
     specidx: '#instructions'
+    ipmdid: instructions
+    ipmddatatype: string
   ObjectAttributeReference:
     label: Intellectual Genre (IIM)|IIM 2:04 Object Attribute Reference
-    sortorder: go430i
+    sortorder: tp430i
     specidx: '#intellectual-genre'
+    ipmdid: intellectualGenre
   IntellectualGenre:
     label: Intellectual Genre (XMP)|XMP Iptc4xmpCore:IntellectualGenre
-    sortorder: go430x
+    sortorder: tp430x
     specidx: '#intellectual-genre'
+    ipmdid: intellectualGenre
+    ipmddatatype: string
   OriginalTransmissionReference:
     label: Job Id (IIM)|IIM 2:103 Original Transmission Reference
-    sortorder: go440i
+    sortorder: tp440i
     specidx: '#job-id'
+    ipmdid: jobid
   TransmissionReference:
     label: Job Id (XMP)|XMP photoshop:TransmissionReference
-    sortorder: go440x
+    sortorder: tp440x
     specidx: '#job-id'
+    ipmdid: jobid
+    ipmddatatype: string
   Keywords:
     label: Keywords (IIM)|IIM 2:25 Keywords
-    sortorder: go450i
+    sortorder: tp450i
     specidx: '#keywords'
+    ipmdid: keywords
   Subject:
     label: Keywords (XMP)|XMP dc:subject
-    sortorder: go450x
+    sortorder: tp450x
     specidx: '#keywords'
+    ipmdid: keywords
+    ipmddatatype: string
   Province-State:
     label: Province or State (legacy) (IIM)|IIM 2:95 Province/State
-    sortorder: go640i
+    sortorder: tp640i
     specidx: '#province-or-state-legacy'
+    ipmdid: provinceState
   State:
     label: Province or State (legacy) (XMP)|XMP photoshop:State
-    sortorder: go640x
+    sortorder: tp640x
     specidx: '#province-or-state-legacy'
+    ipmdid: provinceState
+    ipmddatatype: string
   UsageTerms:
     label: Rights Usage Terms (XMP)|XMP xmpRights:UsageTerms
-    sortorder: go650x
+    sortorder: tp650x
     specidx: '#rights-usage-terms'
+    ipmdid: usageTerms
+    ipmddatatype: AltLang
   Scene:
     label: Scene Code (XMP)|XMP Iptc4xmpCore:Scene
-    sortorder: go660x
+    sortorder: tp660x
     specidx: '#scene-code'
+    ipmdid: sceneCodes
+    ipmddatatype: string
   Source:
     label: Source (XMP)|XMP photoshop:Source
-    sortorder: go670x
+    sortorder: tp670x
     specidx: '#source'
+    ipmdid: source
+    ipmddatatype: string
   SubjectReference:
     label: Subject Code (IIM)|IIM 2:12 Subject Reference
-    sortorder: go680i
+    sortorder: tp680i
     specidx: '#subject-code'
+    ipmdid: subjectCodes
   SubjectCode:
     label: Subject Code (XMP)|XMP Iptc4xmpCore:SubjectCode
-    sortorder: go680x
+    sortorder: tp680x
     specidx: '#subject-code'
+    ipmdid: subjectCodes
+    ipmddatatype: string
   Sub-location:
     label: Sublocation (legacy) (IIM)|IIM 2:92 Sublocation
-    sortorder: go690i
+    sortorder: tp690i
     specidx: '#sublocation-legacy'
+    ipmdid: sublocationName
   Location:
     label: Sublocation (legacy) (XMP)|XMP Iptc4xmpCore:Location
-    sortorder: go690x
+    sortorder: tp690x
     specidx: '#sublocation-legacy'
+    ipmdid: sublocationName
+    ipmddatatype: string
   ObjectName:
     label: Title (IIM)|IIM 2:05 Object Name
-    sortorder: go710i
+    sortorder: tp710i
     specidx: '#title'
+    ipmdid: title
   Title:
     label: Title (XMP)|XMP dc:title
-    sortorder: go710x
+    sortorder: tp710x
     specidx: '#title'
+    ipmdid: title
+    ipmddatatype: AltLang
   Event:
     label: Event (XMP)|XMP Iptc4xmpExt:Event
     sortorder: g320x
     specidx: '#event'
+    ipmdid: eventName
+    ipmddatatype: AltLang
   AdditionalModelInformation:
     label: Additional Model Information (XMP)|XMP Iptc4xmpExt:AddlModelInfo
-    sortorder: go110x
+    sortorder: tp110x
     specidx: '#additional-model-information'
+    ipmdid: additionalModelInfo
+    ipmddatatype: string
   ArtworkOrObject:
     label: Artwork or Object in the Image (XMP)|XMP Iptc4xmpExt:ArtworkOrObject
-    sortorder: go120x
+    sortorder: tp120x
     specidx: '#artwork-or-object-in-the-image'
+    ipmdid: artworkOrObjects
+    ipmddatatype: ArtworkOrObject
   OrganisationInImageCode:
     label: Code of Organisation Featured in the Image (XMP)|XMP Iptc4xmpExt:OrganisationInImageCode
-    sortorder: go140x
+    sortorder: tp140x
     specidx: '#code-of-organisation-featured-in-the-image'
+    ipmdid: organisationInImageCodes
+    ipmddatatype: string
   CopyrightOwner:
     label: Copyright Owner (XMP)|XMP plus:CopyrightOwner
-    sortorder: go160x
+    sortorder: tp160x
     specidx: '#copyright-owner'
+    ipmdid: copyrightOwners
+    ipmddatatype: CopyrightOwner
   AboutCvTerm:
     label: CV-Term About Image (XMP)|XMP Iptc4xmpExt:AboutCvTerm
-    sortorder: go240x
+    sortorder: tp240x
     specidx: '#cv-term-about-image'
+    ipmdid: aboutCvTerms
+    ipmddatatype: CvTerm
   DigitalImageGUID:
     label: Digital Image GUID (XMP)|XMP Iptc4xmpExt:DigImageGUID
-    sortorder: go280x
+    sortorder: tp280x
     specidx: '#digital-image-guid'
+    ipmdid: digitalImageGuid
+    ipmddatatype: string
   DigitalSourceType:
     label: Digital Source Type (XMP)|XMP Iptc4xmpExt:DigitalSourceType
-    sortorder: go290x
+    sortorder: tp290x
     specidx: '#digital-source-type'
+    ipmdid: digitalSourceType
+    ipmddatatype: string
   EmbdEncRightsExpr:
     label: Embedded Encoded Rights Expression (XMP)|XMP Iptc4xmpExt:EmbdEncRightsExpr
-    sortorder: go310x
+    sortorder: tp310x
     specidx: '#embedded-encoded-rights-expression'
+    ipmdid: embdEncRightsExprs
+    ipmddatatype: EmbdEncRightsExpr
   Genre:
     label: Genre (XMP)|XMP Iptc4xmpExt:Genre
-    sortorder: go330x
+    sortorder: tp330x
     specidx: '#genre'
+    ipmdid: genres
+    ipmddatatype: CvTerm
   ImageCreator:
     label: Image Creator (XMP)|XMP plus:ImageCreator
-    sortorder: go350x
+    sortorder: tp350x
     specidx: '#image-creator'
+    ipmdid: imageCreators
+    ipmddatatype: ImageCreator
   Rating:
     label: Image Rating (XMP)|XMP xmp:Rating
-    sortorder: go360x
+    sortorder: tp360x
     specidx: '#image-rating'
+    ipmdid: imageRating
+    ipmddatatype: number
   ImageRegion:
     label: Image Region (XMP)|XMP Iptc4xmpExt:ImageRegion
-    sortorder: go370x
+    sortorder: tp370x
     specidx: '#image-region'
+    ipmdid: imageRegion
+    ipmddatatype: ImageRegion
   RegistryID:
     label: Image Registry Entry (XMP)|XMP Iptc4xmpExt:RegistryId
-    sortorder: go380x
+    sortorder: tp380x
     specidx: '#image-registry-entry'
+    ipmdid: registryEntries
+    ipmddatatype: RegistryEntry
   ImageSupplier:
     label: Image Supplier (XMP)|XMP plus:ImageSupplier
-    sortorder: go390x
+    sortorder: tp390x
     specidx: '#image-supplier'
+    ipmdid: suppliers
+    ipmddatatype: ImageSupplier
   ImageSupplierImageID:
     label: Image Supplier Image ID (XMP)|XMP plus:ImageSupplierImageID
-    sortorder: go400x
+    sortorder: tp400x
     specidx: '#image-supplier-image-id'
+    ipmdid: imageSupplierImageId
+    ipmddatatype: string
   Licensor:
     label: Licensor (XMP)|XMP plus:Licensor
-    sortorder: go460x
+    sortorder: tp460x
     specidx: '#licensor'
+    ipmdid: licensors
+    ipmddatatype: Licensor
   LinkedEncRightsExpr:
     label: Linked  Encoded Rights Expression (XMP)|XMP Iptc4xmpExt:LinkedEncRightsExpr
-    sortorder: go470x
+    sortorder: tp470x
     specidx: '#linked--encoded-rights-expression'
+    ipmdid: linkedEncRightsExprs
+    ipmddatatype: LinkedEncRightsExpr
   LocationCreated:
     label: Location created (XMP)|XMP Iptc4xmpExt:LocationCreated
-    sortorder: go480x
+    sortorder: tp480x
     specidx: '#location-created'
+    ipmdid: locationCreated
+    ipmddatatype: Location
   LocationShown:
     label: Location Shown in the Image (XMP)|XMP Iptc4xmpExt:LocationShown
-    sortorder: go490x
+    sortorder: tp490x
     specidx: '#location-shown-in-the-image'
+    ipmdid: locationsShown
+    ipmddatatype: Location
   MaxAvailHeight:
     label: Max Avail Height (XMP)|XMP Iptc4xmpExt:MaxAvailHeight
-    sortorder: go510x
+    sortorder: tp510x
     specidx: '#max-avail-height'
+    ipmdid: maxAvailHeight
+    ipmddatatype: number
   MaxAvailWidth:
     label: Max Avail Width (XMP)|XMP Iptc4xmpExt:MaxAvailWidth
-    sortorder: go520x
+    sortorder: tp520x
     specidx: '#max-avail-width'
+    ipmdid: maxAvailWidth
+    ipmddatatype: number
   MinorModelAgeDisclosure:
     label: Minor Model Age Disclosure (XMP)|XMP plus:MinorModelAgeDisclosure
-    sortorder: go530x
+    sortorder: tp530x
     specidx: '#minor-model-age-disclosure'
+    ipmdid: minorModelAgeDisclosure
+    ipmddatatype: string
   ModelAge:
     label: Model Age (XMP)|XMP Iptc4xmpExt:ModelAge
-    sortorder: go540x
+    sortorder: tp540x
     specidx: '#model-age'
+    ipmdid: modelAges
+    ipmddatatype: number
   ModelReleaseID:
     label: Model Release Id (XMP)|XMP plus:ModelReleaseID
-    sortorder: go550x
+    sortorder: tp550x
     specidx: '#model-release-id'
+    ipmdid: modelReleaseDocuments
+    ipmddatatype: string
   ModelReleaseStatus:
     label: Model Release Status (XMP)|XMP plus:ModelReleaseStatus
-    sortorder: go560x
+    sortorder: tp560x
     specidx: '#model-release-status'
+    ipmdid: modelReleaseStatus
+    ipmddatatype: string
   OrganisationInImageName:
     label: Name of Organisation Featured in the Image (XMP)|XMP Iptc4xmpExt:OrganisationInImageName
-    sortorder: go570x
+    sortorder: tp570x
     specidx: '#name-of-organisation-featured-in-the-image'
+    ipmdid: organisationInImageNames
+    ipmddatatype: string
   PersonInImage:
     label: Person Shown in the Image (XMP)|XMP Iptc4xmpExt:PersonInImage
-    sortorder: go580x
+    sortorder: tp580x
     specidx: '#person-shown-in-the-image'
+    ipmdid: personInImageNames
+    ipmddatatype: string
   PersonInImageWDetails:
     label: Person Shown in the Image with Details (XMP)|XMP Iptc4xmpExt:PersonInImageWDetails
-    sortorder: go590x
+    sortorder: tp590x
     specidx: '#person-shown-in-the-image-with-details'
+    ipmdid: personsShown
+    ipmddatatype: PersonWDetails
   ProductInImage:
     label: Product Shown in the Image (XMP)|XMP Iptc4xmpExt:ProductInImage
-    sortorder: go610x
+    sortorder: tp610x
     specidx: '#product-shown-in-the-image'
+    ipmdid: productsShown
+    ipmddatatype: ProductWGtin
   PropertyReleaseID:
     label: Property Release Id (XMP)|XMP plus:PropertyReleaseID
-    sortorder: go620x
+    sortorder: tp620x
     specidx: '#property-release-id'
+    ipmdid: propertyReleaseDocuments
+    ipmddatatype: string
   PropertyReleaseStatus:
     label: Property Release Status (XMP)|XMP plus:PropertyReleaseStatus
-    sortorder: go630x
+    sortorder: tp630x
     specidx: '#property-release-status'
+    ipmdid: propertyReleaseStatus
+    ipmddatatype: string
   WebStatement:
     label: Web Statement of Rights (XMP)|XMP xmpRights:WebStatement
-    sortorder: go720x
+    sortorder: tp720x
     specidx: '#web-statement-of-rights'
+    ipmdid: webstatementRights
+    ipmddatatype: string
 et_instructure:
-  xCommentInstr01: "Below: properties of PLUS structures"
-  CopyrightOwnerID:
-    label: "Id (XMP) |XMP plus:CopyrightOwnerID"
-  CopyrightOwnerName:
-    label: "Name (XMP) |XMP plus:CopyrightOwnerName"
-  ImageCreatorID:
-    label: "Id (XMP) |XMP plus:ImageCreatorID"
-  ImageCreatorName:
-    label: "Name (XMP) |XMP plus:ImageCreatorName"
-  ImageSupplierID:
-    label: "Id (XMP) |XMP plus:ImageSupplierID"
-  ImageSupplierName:
-    label: "Name (XMP) |XMP plus:ImageSupplierName"
-  LicensorCity:
-    label: "City (XMP) |XMP plus:LicensorCity"
-  LicensorCountry:
-    label: "Country (XMP) |XMP plus:LicensorCountry"
-  LicensorEmail:
-    label: "Email (XMP) |XMP plus: "
-  LicensorExtendedAddress:
-    label: "Ext Address (XMP) |XMP plus:LicensorEmail"
-  LicensorID:
-    label: "Id (XMP) |XMP plus:LicensorID"
-  LicensorName:
-    label: "Name (XMP) |XMP plus:LicensorName"
-  LicensorPostalCode:
-    label: "Postal Code (XMP) |XMP plus:LicensorPostalCode"
-  LicensorRegion:
-    label: "Region (XMP) |XMP plus:LicensorRegion"
-  LicensorStreetAddress:
-    label: "Street (XMP) |XMP plus:LicensorStreetAddress"
-  LicensorTelephone1:
-    label: "Telephone 1 (XMP) |XMP plus:LicensorTelephone1"
-  LicensorTelephone2:
-    label: "Telephone 2 (XMP) |XMP plus:LicensorTelephone2"
-  LicensorURL:
-    label: "Web URL (XMP) |XMP plus:LicensorURL"
-  xCommentInstr02: "END of PLUS properties presets - APPEND et_instructure.yml below"
   CiAdrExtadr:
     label: Address (XMP)|XMP Iptc4xmpCore:CiAdrExtadr
+    ipmdid: address
+    ipmddatatype: string
   CiAdrCity:
     label: City (XMP)|XMP Iptc4xmpCore:CiAdrCity
+    ipmdid: city
+    ipmddatatype: string
   CiAdrCtry:
     label: Country (XMP)|XMP Iptc4xmpCore:CiAdrCtry
+    ipmdid: country
+    ipmddatatype: string
   CiEmailWork:
     label: Email address(es) (XMP)|XMP Iptc4xmpCore:CiEmailWork
+    ipmdid: emailwork
+    ipmddatatype: string
   CiTelWork:
     label: Phone number(s) (XMP)|XMP Iptc4xmpCore:CiTelWork
+    ipmdid: phonework
+    ipmddatatype: string
   CiAdrPcode:
     label: Postal Code (XMP)|XMP Iptc4xmpCore:CiAdrPcode
+    ipmdid: postalCode
+    ipmddatatype: string
   CiAdrRegion:
     label: State/Province (XMP)|XMP Iptc4xmpCore:CiAdrRegion
+    ipmdid: region
+    ipmddatatype: string
   CiUrlWork:
     label: Web URL(s) (XMP)|XMP Iptc4xmpCore:CiUrlWork
+    ipmdid: weburlwork
+    ipmddatatype: string
   AOCircaDateCreated:
     label: Circa Date Created (XMP)|XMP Iptc4xmpExt:AOCircaDateCreated
+    ipmdid: circaDateCreated
+    ipmddatatype: string
   AOContentDescription:
     label: Content Description (XMP)|XMP Iptc4xmpExt:AOContentDescription
+    ipmdid: contentDescription
+    ipmddatatype: AltLang
   AOContributionDescription:
     label: Contribution Description (XMP)|XMP Iptc4xmpExt:AOContributionDescription
+    ipmdid: contributionDescription
+    ipmddatatype: AltLang
   AOCopyrightNotice:
     label: Copyright Notice (XMP)|XMP Iptc4xmpExt:AOCopyrightNotice
+    ipmdid: copyrightNotice
+    ipmddatatype: AltLang
   AOCreator:
     label: Creator (XMP)|XMP Iptc4xmpExt:AOCreator
+    ipmdid: creatorNames
+    ipmddatatype: string
   AOCreatorId:
     label: Creator ID (XMP)|XMP Iptc4xmpExt:AOCreatorId
+    ipmdid: creatorIdentifiers
+    ipmddatatype: string
   AOCurrentCopyrightOwnerId:
     label: Current Copyright Owner ID (XMP)|XMP Iptc4xmpExt:AOCurrentCopyrightOwnerId
+    ipmdid: currentCopyrightOwnerIdentifier
+    ipmddatatype: string
   AOCurrentCopyrightOwnerName:
     label: Current Copyright Owner Name (XMP)|XMP Iptc4xmpExt:AOCurrentCopyrightOwnerName
+    ipmdid: currentCopyrightOwnerName
+    ipmddatatype: string
   AOCurrentLicensorId:
     label: Current Licensor ID (XMP)|XMP Iptc4xmpExt:AOCurrentLicensorId
+    ipmdid: currentLicensorIdentifier
+    ipmddatatype: string
   AOCurrentLicensorName:
     label: Current Licensor Name (XMP)|XMP Iptc4xmpExt:AOCurrentLicensorName
+    ipmdid: currentLicensorName
+    ipmddatatype: string
   AODateCreated:
     label: Date Created (XMP)|XMP Iptc4xmpExt:AODateCreated
+    ipmdid: dateCreated
+    ipmddatatype: string
   AOPhysicalDescription:
     label: Physical Description (XMP)|XMP Iptc4xmpExt:AOPhysicalDescription
+    ipmdid: physicalDescription
+    ipmddatatype: AltLang
   AOSource:
     label: Source (XMP)|XMP Iptc4xmpExt:AOSource
+    ipmdid: source
+    ipmddatatype: string
   AOSourceInvNo:
     label: Source Inventory Number (XMP)|XMP Iptc4xmpExt:AOSourceInvNo
+    ipmdid: sourceInventoryNr
+    ipmddatatype: string
   AOSourceInvURL:
     label: Source Inventory URL (XMP)|XMP Iptc4xmpExt:AOSourceInvURL
+    ipmdid: sourceInventoryUrl
+    ipmddatatype: string
   AOStylePeriod:
     label: Style Period (XMP)|XMP Iptc4xmpExt:AOStylePeriod
+    ipmdid: stylePeriod
+    ipmddatatype: string
   AOTitle:
     label: Title (XMP)|XMP Iptc4xmpExt:AOTitle
+    ipmdid: title
+    ipmddatatype: AltLang
   CvId:
     label: CV-Term CV ID (XMP)|XMP Iptc4xmpExt:CvId
+    ipmdid: cvId
+    ipmddatatype: string
   CvTermId:
     label: CV-Term ID (XMP)|XMP Iptc4xmpExt:CvTermId
+    ipmdid: cvTermId
+    ipmddatatype: string
   CvTermName:
     label: CV-Term name (XMP)|XMP Iptc4xmpExt:CvTermName
+    ipmdid: cvTermName
+    ipmddatatype: AltLang
   CvTermRefinedAbout:
     label: Refined 'about' Relationship of the CV-Term (XMP)|XMP Iptc4xmpExt:CvTermRefinedAbout
+    ipmdid: cvTermRefinedAbout
+    ipmddatatype: string
   EncRightsExpr:
     label: Encoded Rights Expression (XMP)|XMP Iptc4xmpExt:EncRightsExpr
+    ipmdid: rightsExprLangId
+    ipmddatatype: string
   RightsExprEncType:
     label: Encoding type (XMP)|XMP Iptc4xmpExt:RightsExprEncType
+    ipmdid: rightsExprLangId
+    ipmddatatype: string
   RightsExprLangId:
     label: Rights Expression Language ID (XMP)|XMP Iptc4xmpExt:RightsExprLangId
+    ipmdid: linkedRightsExpr
+    ipmddatatype: string
   Identifier:
     label: Identifier (XMP)|XMP xmp:Identifier
+    ipmdid: identifiers
+    ipmddatatype: string
   Name:
     label: Region Name (XMP)|XMP Iptc4xmpExt:Name
+    ipmdid: name
+    ipmddatatype: AltLang
   RegionBoundary:
     label: Region Boundary (XMP)|XMP Iptc4xmpExt:RegionBoundary
+    ipmdid: regionBoundary
+    ipmddatatype: RegionBoundary
   RiD:
     label: Region Identifier (XMP)|XMP Iptc4xmpExt:rId
+    ipmdid: rId
+    ipmddatatype: string
   RCtype:
     label: Region Content Type (XMP)|XMP Iptc4xmpExt:rCtype
+    ipmdid: rCtype
+    ipmddatatype: Entity
   RRole:
     label: Region Role (XMP)|XMP Iptc4xmpExt:rRole
+    ipmdid: rRole
+    ipmddatatype: Entity
   RbShape:
     label: Boundary Shape (XMP)|XMP Iptc4xmpExt:rbShape
+    ipmdid: rbShape
+    ipmddatatype: string
   RbUnit:
     label: Boundary Measuring Unit (XMP)|XMP Iptc4xmpExt:rbUnit
+    ipmdid: rbUnit
+    ipmddatatype: string
   RbX:
     label: X-Axis Coordinate (XMP)|XMP Iptc4xmpExt:rbX
+    ipmdid: rbX
+    ipmddatatype: number
   RbY:
     label: Y-Axis Coordinate (XMP)|XMP Iptc4xmpExt:rbY
+    ipmdid: rbY
+    ipmddatatype: number
   RbW:
     label: Rectangle Width (XMP)|XMP Iptc4xmpExt:rbW
+    ipmdid: rbW
+    ipmddatatype: number
   RbH:
     label: Rectangle Height (XMP)|XMP Iptc4xmpExt:rbH
+    ipmdid: rbH
+    ipmddatatype: number
   RbRx:
     label: Circle Radius (XMP)|XMP Iptc4xmpExt:rbRx
+    ipmdid: rbRx
+    ipmddatatype: number
   RbVertices:
     label: Polygon Vertices (XMP)|XMP Iptc4xmpExt:rbVertices
+    ipmdid: rbVertices
+    ipmddatatype: RegionBoundaryPoint
   LinkedRightsExpr:
     label: Link to Encoded Rights Expression (XMP)|XMP Iptc4xmpExt:LinkedRightsExpr
+    ipmdid: rightsExprEncType
+    ipmddatatype: string
   City:
     label: City (XMP)|XMP Iptc4xmpExt:City
+    ipmdid: city
+    ipmddatatype: AltLang
   CountryCode:
     label: Country ISO-Code (XMP)|XMP Iptc4xmpExt:CountryCode
+    ipmdid: countryCode
+    ipmddatatype: string
   CountryName:
     label: Country Name (XMP)|XMP Iptc4xmpExt:CountryName
+    ipmdid: countryName
+    ipmddatatype: AltLang
   NA:
     label: GPS-Longitude (XMP)|XMP exif:GPSLongitude
+    ipmdid: gpsLongitude
+    ipmddatatype: number
   LocationId:
     label: Location Identifier (XMP)|XMP Iptc4xmpExt:LocationId
+    ipmdid: identifiers
+    ipmddatatype: string
   LocationName:
     label: Location Name (XMP)|XMP Iptc4xmpExt:LocationName
+    ipmdid: name
+    ipmddatatype: AltLang
   ProvinceState:
     label: Province or State (XMP)|XMP Iptc4xmpExt:ProvinceState
+    ipmdid: provinceState
+    ipmddatatype: AltLang
   Sublocation:
     label: Sublocation (XMP)|XMP Iptc4xmpExt:Sublocation
+    ipmdid: sublocation
+    ipmddatatype: AltLang
   WorldRegion:
     label: World Region (XMP)|XMP Iptc4xmpExt:WorldRegion
+    ipmdid: worldRegion
+    ipmddatatype: AltLang
   PersonCharacteristic:
     label: Characteristics (XMP)|XMP Iptc4xmpExt:PersonCharacteristic
+    ipmdid: characteristics
+    ipmddatatype: CvTerm
   PersonDescription:
     label: Description (XMP)|XMP Iptc4xmpExt:PersonDescription
+    ipmdid: description
+    ipmddatatype: AltLang
   PersonId:
     label: Identifier (XMP)|XMP Iptc4xmpExt:PersonId
+    ipmdid: identifiers
+    ipmddatatype: string
   PersonName:
     label: Name (XMP)|XMP Iptc4xmpExt:PersonName
+    ipmdid: name
+    ipmddatatype: AltLang
   ProductDescription:
     label: Description (XMP)|XMP Iptc4xmpExt:ProductDescription
+    ipmdid: description
+    ipmddatatype: AltLang
   ProductGTIN:
     label: GTIN (XMP)|XMP Iptc4xmpExt:ProductGTIN
+    ipmdid: gtin
+    ipmddatatype: string
   ProductName:
     label: Name (XMP)|XMP Iptc4xmpExt:ProductName
+    ipmdid: name
+    ipmddatatype: AltLang
   RegItemId:
     label: Item Id (XMP)|XMP Iptc4xmpExt:RegItemId
+    ipmdid: assetIdentifier
+    ipmddatatype: string
   RegOrgId:
     label: Organisation Id (XMP)|XMP Iptc4xmpExt:RegOrgId
+    ipmdid: registryIdentifier
+    ipmddatatype: string
   RegEntryRole:
     label: Role (XMP)|XMP Iptc4xmpExt:RegEntryRole
+    ipmdid: role
+    ipmddatatype: string
+  LicensorID:
+    label: Licensor ID (XMP)|XMP plus:LicensorID
+    ipmdid: licensorId
+    ipmddatatype: string
+  LicensorName:
+    label: Licensor Name (XMP)|XMP plus:LicensorName
+    ipmdid: licensorName
+    ipmddatatype: string
+  LicensorStreetAddress:
+    label: Licensor Address (XMP)|XMP plus:LicensorStreetAddress
+    ipmdid: licensorAddress
+    ipmddatatype: string
+  LicensorExtendedAddress:
+    label: Licensor Adress Detail (XMP)|XMP plus:LicensorExtendedAddress
+    ipmdid: licensorAddressDetail
+    ipmddatatype: string
+  LicensorCity:
+    label: Licensor City (XMP)|XMP plus:LicensorCity
+    ipmdid: licensorCity
+    ipmddatatype: string
+  LicensorRegion:
+    label: Licensor State or Province (XMP)|XMP plus:LicensorRegion
+    ipmdid: licensorStateProvince
+    ipmddatatype: string
+  LicensorPostalCode:
+    label: Licensor Postal Code (XMP)|XMP plus:LicensorPostalCode
+    ipmdid: licensorPostalCode
+    ipmddatatype: string
+  LicensorCountry:
+    label: Licensor Country (XMP)|XMP plus:LicensorCountry
+    ipmdid: licensorCountryName
+    ipmddatatype: string
+  LicensorTelephoneType1:
+    label: Licensor Telephone Type 1 (XMP)|XMP plus:LicensorTelephoneType1
+    ipmdid: licensorTelephoneType1
+    ipmddatatype: string
+  LicensorTelephone1:
+    label: Licensor Telephone 1 (XMP)|XMP plus:LicensorTelephone1
+    ipmdid: licensorTelephone1
+    ipmddatatype: string
+  LicensorTelephoneType2:
+    label: Licensor Telephone Type 2 (XMP)|XMP plus:LicensorTelephoneType2
+    ipmdid: licensorTelephoneType2
+    ipmddatatype: string
+  LicensorTelephone2:
+    label: Licensor Telephone 2 (XMP)|XMP plus:LicensorTelephone2
+    ipmdid: licensorTelephone2
+    ipmddatatype: string
+  LicensorEmail:
+    label: Licensor Email (XMP)|XMP plus:LicensorEmail
+    ipmdid: licensorEmail
+    ipmddatatype: string
+  LicensorURL:
+    label: Licensor URL (XMP)|XMP plus:LicensorURL
+    ipmdid: licensorUrl
+    ipmddatatype: string
+  CopyrightOwnerID:
+    label: Copyright Owner ID (XMP)|XMP plus:CopyrightOwnerID
+    ipmdid: copyrightOwnerId
+    ipmddatatype: string
+  CopyrightOwnerName:
+    label: Copyright Owner Name (XMP)|XMP plus:CopyrightOwnerName
+    ipmdid: copyrightOwnerName
+    ipmddatatype: string
+  ImageCreatorID:
+    label: Image Creator ID (XMP)|XMP plus:ImageCreatorID
+    ipmdid: imageCreatorId
+    ipmddatatype: string
+  ImageCreatorName:
+    label: Image Creator Name (XMP)|XMP plus:ImageCreatorName
+    ipmdid: imageCreatorName
+    ipmddatatype: string
+  ImageSupplierID:
+    label: Image Supplier ID (XMP)|XMP plus:ImageSupplierID
+    ipmdid: imageSupplierId
+    ipmddatatype: string
+  ImageSupplierName:
+    label: Image Supplier Name (XMP)|XMP plus:ImageSupplierName
+    ipmdid: imageSupplierName
+    ipmddatatype: string
+

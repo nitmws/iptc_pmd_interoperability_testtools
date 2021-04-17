@@ -229,6 +229,95 @@ def check_mainpmd(test_json_fp: str, testresultsfp: str, comparevalues: bool = F
             append_line2file(msg, testresultsfp)
 
 
+def investigate_ipmdstructure(parent_propnames: str, ugtopic: str, parent_so: str, level: int,
+                              structid: str, teststruct: dict,
+                              testresults_text_fp: str, testresults_csv_fp: str,
+                              csvsep: str = ',') -> None:
+    """Investigates which IPTC Photo Metadata properties exist inside a structure.
+    This function may be called recursively. Only investigations at level 2 and 3 are supported (currently).
+
+    :param parent_propnames: names/labels of parent properties, csvsep-separated
+    :param ugtopic: IPTC User Guide topic of the top level property
+    :param parent_so: sort order of the parent property
+    :param level: level of the investigation. Top level = level 1
+    :param structid: IPTC PMD identifier of the investigated structure
+    :param teststruct: structure (dict) from the tested image file
+    :param testresults_text_fp: path of the file for logging test results
+    :param testresults_csv_fp: path of the CSV file for logging test results
+    :return: nothing
+    """
+    if level < 2 or level > 3:
+        return
+
+    groupname = 'ipmd_struct'
+    if structid in pmdguide[groupname]:
+        refstru = pmdguide[groupname][structid]
+    else:
+        return
+    for ipmdpropid in refstru:
+        ipmdprop: dict = refstru[ipmdpropid]
+        if 'label' in ipmdprop:
+            label: str = ipmdprop['label']
+        else:
+            label: str = 'UNKNOWN-ERROR'
+        msg: str = f'*** Investigating IPTC PMD structure <{label} used by {parent_propnames}>'
+        print(msg)
+        csvrow: str = ugtopic + csvsep
+        if 'sortorder' in ipmdprop:
+            sortorder: str = ipmdprop['sortorder']
+        else:
+            sortorder: str = 'xxx'
+        csvrow += parent_so + '-' + sortorder + csvsep
+        datatype: str = 'xxx'
+        if 'datatype' in ipmdprop:
+            datatype: str = ipmdprop['datatype']
+        dataformat: str = ''
+        if 'dataformat' in ipmdprop:
+            dataformat: str = ipmdprop['dataformat']
+        invstructid: str = ''  # id/name of a structure to be investigated
+        if datatype == 'struct':
+            if dataformat == 'AltLang':  # workaround to cover what ExifTool returns for AltLang values: a string
+                datatype = 'string'
+            else:
+                invstructid = dataformat
+
+        if level == 2:
+            csvrow += parent_propnames + csvsep + label + csvsep + 'x' + csvsep  # NameL1 inherited, L2 applied, L3 x-ed
+        if level == 3:
+            csvrow += parent_propnames + csvsep + label + csvsep  # NameL1 inherited, L2 applied, L3 x-ed
+        csvrow += 'not spec' + csvsep  # = the IIM column
+        xmpvalue = ''
+        if 'etTag' in ipmdprop:
+            ettag = ipmdprop['etTag']
+            if isinstance(teststruct, list):
+                propfound: bool = False
+                for singleteststru in teststruct:
+                    if ettag in singleteststru:
+                        propfound = True
+                if propfound:
+                    keymsg = 'found'
+                else:
+                    keymsg = 'MISSING'
+            else:
+                if ettag in teststruct:
+                    keymsg = 'found'
+                    xmpvalue = teststruct[ettag]
+                else:
+                    keymsg = 'MISSING'
+            msg = f'{keymsg} its corresponding XMP property'
+            print(msg)
+            append_line2file(msg, testresults_text_fp)
+            csvrow += keymsg + csvsep # = the XMP column
+        else:
+            csvrow += 'not spec' + csvsep
+        csvrow += '---' + csvsep
+        append_line2file(csvrow, testresults_csv_fp)
+        if invstructid != '':
+            investigate_ipmdstructure(parent_propnames + csvsep + label, ugtopic, parent_so + '-' + sortorder,
+                                      level + 1, invstructid, xmpvalue,
+                                      testresults_text_fp, testresults_csv_fp, csvsep)
+
+
 def investigate_mainpmd(test_json_fp: str, testresults_text_fp: str, testresults_csv_fp: str,
                         csvsep: str = ',') -> None:
     """Investigates which IPTC Photo Metadata top level (=properties not inside a structure) properties exist
@@ -241,7 +330,9 @@ def investigate_mainpmd(test_json_fp: str, testresults_text_fp: str, testresults
     with open(test_json_fp, encoding='utf-8') as testjson_file:
         ipmdtest = json.load(testjson_file)[0]
 
-    append_line2file(f'topic{csvsep}sortorder{csvsep}IPTC PMD Name{csvsep}IIM prop{csvsep}XMP prop', testresults_csv_fp)
+    csvheader: str = f'topic{csvsep}sortorder{csvsep}IPMD Name L1{csvsep}IPMD Name L2{csvsep}IPMD Name L3'
+    csvheader += f'{csvsep}IIM prop{csvsep}XMP prop{csvsep}Sync Values{csvsep}Comments'
+    append_line2file(csvheader, testresults_csv_fp)
     groupname = 'ipmd_top'
     for ipmdpropid in pmdguide[groupname]:
         ipmdprop: dict = pmdguide[groupname][ipmdpropid]
@@ -262,23 +353,57 @@ def investigate_mainpmd(test_json_fp: str, testresults_text_fp: str, testresults
         else:
             sortorder: str = 'xxx'
         csvrow += sortorder + csvsep
-        csvrow += label + csvsep
+        csvrow += label + csvsep + 'x' + csvsep + 'x' + csvsep  # Name L1 is set, L2 and L3 x-ed out
+        datatype: str = 'xxx'
+        if 'datatype' in ipmdprop:
+            datatype: str = ipmdprop['datatype']
+        dataformat: str = ''
+        if 'dataformat' in ipmdprop:
+            dataformat: str = ipmdprop['dataformat']
+        invstructid: str = ''  # id/name of a structure to be investigated
+        if datatype == 'struct':
+            if dataformat == 'AltLang':  # workaround to cover what ExifTool returns for AltLang values: a string
+                datatype = 'string'
+            else:
+                invstructid = dataformat
+        plainvalue: bool = False
+        if datatype == 'string' or datatype == 'number':
+            plainvalue = True
+
+        iimfound: bool = False
+        iimvalue: str = ''
+        xmpvalue = ''
+
+        special_comparing: str = ''  # indicated a special procedure for comparing values
+        if ipmdpropid == 'creatorNames':
+            special_comparing += 'iim1xmplist|'
+        if ipmdpropid == 'dateCreated':
+            special_comparing += 'iimdatetime|'
+
         if 'etIIM' in ipmdprop:
             ettag = ipmdprop['etIIM']
             if ettag in ipmdtest:
-                keymsg = 'FOUND'
+                keymsg = 'found'
+                iimfound = True
+                if plainvalue:
+                    iimvalue = ipmdtest[ettag]
             else:
                 keymsg = 'MISSING'
+            if ettag == 'IPTC:DateCreated+IPTC:TimeCreated':
+                keymsg = 'MISSING'
+                if 'IPTC:DateCreated' in ipmdtest and 'IPTC:TimeCreated' in ipmdtest:
+                    keymsg = 'found'
             msg = f'{keymsg} its corresponding IIM property'
             print(msg)
             append_line2file(msg, testresults_text_fp)
             csvrow += keymsg + csvsep
         else:
-            csvrow += 'NA' + csvsep
+            csvrow += 'not spec' + csvsep
         if 'etXMP' in ipmdprop:
             ettag = ipmdprop['etXMP']
             if ettag in ipmdtest:
-                keymsg = 'FOUND'
+                keymsg = 'found'
+                xmpvalue = ipmdtest[ettag]
             else:
                 keymsg = 'MISSING'
             msg = f'{keymsg} its corresponding XMP property'
@@ -286,7 +411,45 @@ def investigate_mainpmd(test_json_fp: str, testresults_text_fp: str, testresults
             append_line2file(msg, testresults_text_fp)
             csvrow += keymsg + csvsep
         else:
-            csvrow += 'NA' + csvsep
+            csvrow += 'not spec' + csvsep
+        keymsg = '---'
+        # compare plain values
+        if plainvalue:
+            if iimfound:
+                if iimvalue == xmpvalue:
+                    keymsg = 'in sync'
+                else:
+                    keymsg = 'NOT SYNC'
+                if 'iim1xmplist' in special_comparing:  # it may override the keymsg above!
+                    if isinstance(xmpvalue, list):
+                        if len(xmpvalue) > 0:
+                            if iimvalue == xmpvalue[0]:
+                                keymsg = 'in sync'
+                            else:
+                                keymsg = 'NOT SYNC'
+
+            if 'iimdatetime' in special_comparing:  # it may override the keymsg above!
+                iimdatevalue: str = ''
+                dateettag: str = 'IPTC:DateCreated'
+                if dateettag in ipmdtest:
+                    iimdatevalue = ipmdtest[dateettag]
+                iimtimevalue: str = ''
+                timeettag: str = 'IPTC:TimeCreated'
+                if timeettag in ipmdtest:
+                    iimtimevalue = ipmdtest[timeettag]
+                iimdatetimevalue = iimdatevalue + ' ' + iimtimevalue
+                if iimdatetimevalue == xmpvalue:
+                    keymsg = 'in sync'
+                else:
+                    keymsg = 'NOT SYNC'
+
+
+
+        csvrow += keymsg + csvsep
         append_line2file(csvrow, testresults_csv_fp)
+        if invstructid != '':
+            investigate_ipmdstructure(label, ugtopic, sortorder, 2, invstructid, xmpvalue,
+                                      testresults_text_fp, testresults_csv_fp, csvsep)
+
 
 

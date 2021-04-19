@@ -56,8 +56,8 @@ def run_investigation1(testimgfn: str) -> None:
 
 
 def testdummy1():
-    testfilename = '_testimg_AdobeLrC_10_allPmdFilled_1d'
-    # testfilename = '_IPTC-PhotometadataRef-Std2019.1'
+    # testfilename = '_testimg_AdobeLrC_10_allPmdFilled_1d'
+    testfilename = '_IPTC-PhotometadataRef-Std2019.1_2'
     testfp = '../files/cache/investigate1/' + testfilename + '.json'
     testresults_txt_1fp = TESTRESULTSDIR + testfilename + '_inv1.txt'
     testresults_csv_1fp = TESTRESULTSDIR + testfilename + '_inv1.csv'
@@ -67,7 +67,7 @@ def testdummy1():
 
 if __name__ == '__main__':
 
-    DEV: bool = True
+    DEV: bool = False
 
     if DEV:
         testdummy1()

@@ -4,7 +4,7 @@
 #   see: https://www.iptc.org/std/photometadata/specification/IPTC-PhotoMetadata
 # Covered IPTC Photo Metadata Standard: version 2019.1
 #
-# This document was created on 2021-04-17 by MS
+# This document was created on 2021-04-19 by MS
 #
 # This document has two main regions:
 # * top level property names starting with ipmd_: they can be used for a processing based on the IPTC PMD standard
@@ -17,26 +17,32 @@
 # * ipmd_struct: structures and their properties defined by the IPTC PMD Standard
 #
 # *** ipmd_top structure - for each top level property:
-# label = the name of the property, defined by the IPTC PMD standard
-# sortorder = a short string which can be used for ordering properties - the order goes across IPTC Core and Extension
-# ugtopic = identifier of a topical group defined by the IPTC PMD User Guide
+# Identifier of the property
+# * label = the name of the property, defined by the IPTC PMD standard
+# * sortorder = a short string which can be used for ordering properties - the order goes across IPTC Core and Extension
+# * ugtopic = identifier of a topical group defined by the IPTC PMD User Guide
 #           see https://www.iptc.org/std/photometadata/documentation/userguide/
-# specidx = URL fragement which can be appended to the URL of the IPTC PMD web document on the web
+# * specidx = URL fragement which can be appended to the URL of the IPTC PMD web document on the web
 #           https://www.iptc.org/std/photometadata/specification/IPTC-PhotoMetadata
 #           to link to the corresponding specification of this IPMD property
-# IIMid = Dataset identifier defined by the IPTC IIM standard
-# IIMname = human readable name of the property defined by the IPTC IIM standard
-# XMPid = namespace":"identifier of the property in the XMP packet
-# datatype = data type of the value. "string" or "number" or the name of a structure with an uppercase character
+# * datatype = data type of the value. "string" or "number" or "struct"
+# * dataformat = special format of a string or number, if "struct": identifier of the applied structure
+# * propoccurrence = how many times this property may occur: "single" or "multi"
+# * IIMid = Dataset identifier defined by the IPTC IIM standard
+# * IIMname = human readable name of the property defined by the IPTC IIM standard
+# * XMPid = namespace":"identifier of the property in the XMP packet
 # etIIM, etXMP = ExifTool tag names for the IIM and XMP variants of the property
 # *** ipmd_struct structure - for each structure:
 # * Idenitifier of a structure
-# ** label = see above
-# ** sortorder = see above
-# ** specidx = see above
-# ** XMPid = see above
-# ** datatype = see above
-# ** etTag = ExifTool tag name outside the JSON structure
+# ** Identifier of a property inside this structure
+# *** label = see above
+# *** sortorder = see above
+# *** specidx = see above
+# *** XMPid = see above
+# *** datatype = see above
+# *** dataformat = see above
+# *** propoccurrence = see above
+# *** etTag = ExifTool tag name outside the JSON structure
 #
 # ***** et_.... properties:
 # They build on the JSON structure exported by ExifTool - https://exiftool.org
@@ -50,8 +56,11 @@
 #        parameters -struct -G1 include the namespace (e.g. XMP-dc:Rights) by default,
 #        parameters -struct -G don't include it (e.g. XMP:Rights)
 # ** label = a sequence of IPTC Photo Metadata and technical standard labels, separated by a |
-# ** sortorder: a key for sorting properties (below: used only for topwithprefix properties)
+# ** sortorder: see above
+# ** specidx: see above
 # ** output: a sequence of target object(s) for the output, separated by commas
+# ** ipmdid: identifier of the property in the ipmd_top structure
+# ** ipmddatatype: "string", "number" or the name of Structure, starting with Uppercase
 #
 # Generic Notes:
 # The structures follow the YAML syntax: they have to be indented by at least 2 spaces
@@ -67,7 +76,7 @@
 # 3/ ... go to the iptc_struct sub-properties and search for this name.
 # 4/ In a few cases properties inside a structure have as datatype a structure. Do the same as in 2/
 #
-timestamp: '2021-04-17T15:24:47.906668+00:00'
+timestamp: '2021-04-19T08:12:47.9+00:00'
 ipmd_top:
   cityName:
     label: City (legacy)
@@ -979,7 +988,7 @@ ipmd_struct:
       datatype: string
       propoccurrence: single
       XMPid: Iptc4xmpExt:rId
-      etTag: RiD
+      etTag: RId
     name:
       label: Region Name
       sortorder: s0503
@@ -1007,14 +1016,14 @@ ipmd_struct:
       propoccurrence: multi
       XMPid: Iptc4xmpExt:rRole
       etTag: RRole
-    any:
+    $anypmdproperty:
       label: Other Metadata
       sortorder: s0506
       specidx: '#other-metadata'
       datatype: any
       propoccurrence: single
-      XMPid: any:any
-      etTag: '{any}'
+      XMPid: ''
+      etTag: ''
   RegionBoundary:
     rbShape:
       label: Boundary Shape
@@ -1159,7 +1168,7 @@ ipmd_struct:
       datatype: number
       propoccurrence: single
       XMPid: exif:GPSAltitude
-      etTag: NA
+      etTag: GPSAltitude
     gpsLatitude:
       label: GPS-Latitude
       sortorder: s0912
@@ -1167,7 +1176,7 @@ ipmd_struct:
       datatype: number
       propoccurrence: single
       XMPid: exif:GPSLatitude
-      etTag: NA
+      etTag: GPSLatitude
     gpsLongitude:
       label: GPS-Longitude
       sortorder: s0913
@@ -1175,7 +1184,7 @@ ipmd_struct:
       datatype: number
       propoccurrence: single
       XMPid: exif:GPSLongitude
-      etTag: NA
+      etTag: GPSLongitude
     identifiers:
       label: Location Identifier
       sortorder: s0901
@@ -2586,7 +2595,7 @@ et_instructure:
     label: Region Boundary (XMP)|XMP Iptc4xmpExt:RegionBoundary
     ipmdid: regionBoundary
     ipmddatatype: RegionBoundary
-  RiD:
+  RId:
     label: Region Identifier (XMP)|XMP Iptc4xmpExt:rId
     ipmdid: rId
     ipmddatatype: string
@@ -2646,7 +2655,15 @@ et_instructure:
     label: Country Name (XMP)|XMP Iptc4xmpExt:CountryName
     ipmdid: countryName
     ipmddatatype: AltLang
-  NA:
+  GPSAltitude:
+    label: GPS-Altitude (XMP)|XMP exif:GPSAltitude
+    ipmdid: gpsAltitude
+    ipmddatatype: number
+  GPSLatitude:
+    label: GPS-Latitude (XMP)|XMP exif:GPSLatitude
+    ipmdid: gpsLatitude
+    ipmddatatype: number
+  GPSLongitude:
     label: GPS-Longitude (XMP)|XMP exif:GPSLongitude
     ipmdid: gpsLongitude
     ipmddatatype: number

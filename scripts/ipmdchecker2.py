@@ -255,6 +255,8 @@ def investigate_ipmdstructure(parent_propnames: str, ugtopic: str, parent_so: st
     else:
         return
     for ipmdpropid in refstru:
+        if ipmdpropid == '$anypmdproperty':  # that's a placeholder for "any other pmd property", skip it
+            continue
         ipmdprop: dict = refstru[ipmdpropid]
         if 'label' in ipmdprop:
             label: str = ipmdprop['label']
@@ -291,9 +293,11 @@ def investigate_ipmdstructure(parent_propnames: str, ugtopic: str, parent_so: st
             ettag = ipmdprop['etTag']
             if isinstance(teststruct, list):
                 propfound: bool = False
-                for singleteststru in teststruct:
-                    if ettag in singleteststru:
-                        propfound = True
+                if len(teststruct) > 0:
+                    for singleteststru in teststruct:
+                        if ettag in singleteststru:
+                            propfound = True
+                    xmpvalue = teststruct[0][ettag]
                 if propfound:
                     keymsg = 'found'
                 else:

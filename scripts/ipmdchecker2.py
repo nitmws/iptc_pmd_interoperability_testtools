@@ -236,61 +236,61 @@ def investigate_ipmdstructure(parent_propnames: str, ugtopic: str, parent_so: st
     """Investigates which IPTC Photo Metadata properties exist inside a structure.
     This function may be called recursively. Only investigations at level 2 and 3 are supported (currently).
 
-    :param parent_propnames: names/labels of parent properties, csvsep-separated
+    :param parent_propnames: name(s)/label(s) of parent property(ies), csvsep-separated
     :param ugtopic: IPTC User Guide topic of the top level property
     :param parent_so: sort order of the parent property
     :param level: level of the investigation. Top level = level 1
     :param structid: IPTC PMD identifier of the investigated structure
-    :param teststruct: structure (dict) from the tested image file
+    :param teststruct: structure (dict) from the tested image file to be investigated
     :param testresults_text_fp: path of the file for logging test results
     :param testresults_csv_fp: path of the CSV file for logging test results
     :return: nothing
     """
-    if level < 2 or level > 3:
+    if level < 2 or level > 3:  # range of the supported level: 2 to 3
         return
 
-    groupname = 'ipmd_struct'
-    if structid in pmdguide[groupname]:
-        refstru = pmdguide[groupname][structid]
+    refgroupname: str = 'ipmd_struct'  # a structure is investigated, reference data only in this group
+    if structid in pmdguide[refgroupname]:
+        refstru: dict = pmdguide[refgroupname][structid]
     else:
         return
     for ipmdpropid in refstru:
         if ipmdpropid == '$anypmdproperty':  # that's a placeholder for "any other pmd property", skip it
             continue
-        ipmdprop: dict = refstru[ipmdpropid]
-        if 'label' in ipmdprop:
-            label: str = ipmdprop['label']
+        refipmdprop: dict = refstru[ipmdpropid]
+        if 'label' in refipmdprop:
+            label: str = refipmdprop['label']
         else:
-            label: str = 'UNKNOWN-ERROR'
+            label: str = 'UNKNOWN-ERROR'  # a property without a label should not be in the reference data
         msg: str = f'*** Investigating IPTC PMD structure <{label} used by {parent_propnames}>'
         print(msg)
         csvrow: str = ugtopic + csvsep
-        if 'sortorder' in ipmdprop:
-            sortorder: str = ipmdprop['sortorder']
+        if 'sortorder' in refipmdprop:
+            sortorder: str = refipmdprop['sortorder']
         else:
             sortorder: str = 'xxx'
         csvrow += parent_so + '-' + sortorder + csvsep
         datatype: str = 'xxx'
-        if 'datatype' in ipmdprop:
-            datatype: str = ipmdprop['datatype']
+        if 'datatype' in refipmdprop:
+            datatype: str = refipmdprop['datatype']
         dataformat: str = ''
-        if 'dataformat' in ipmdprop:
-            dataformat: str = ipmdprop['dataformat']
+        if 'dataformat' in refipmdprop:
+            dataformat: str = refipmdprop['dataformat']
         invstructid: str = ''  # id/name of a structure to be investigated
         if datatype == 'struct':
             if dataformat == 'AltLang':  # workaround to cover what ExifTool returns for AltLang values: a string
                 datatype = 'string'
             else:
                 invstructid = dataformat
-
+        # create the appropriate sequence of PMD property names for a specific metadata level
         if level == 2:
             csvrow += parent_propnames + csvsep + label + csvsep + 'x' + csvsep  # NameL1 inherited, L2 applied, L3 x-ed
         if level == 3:
-            csvrow += parent_propnames + csvsep + label + csvsep  # NameL1 inherited, L2 applied, L3 x-ed
-        csvrow += 'not spec' + csvsep  # = the IIM column
+            csvrow += parent_propnames + csvsep + label + csvsep  # NameL1 and L2 inherited, L3 applied
+        csvrow += 'not spec' + csvsep  # = the IIM column, no IIM spec exists for a property in a structure
         xmpvalue = ''
-        if 'etTag' in ipmdprop:
-            ettag = ipmdprop['etTag']
+        if 'etTag' in refipmdprop:
+            ettag = refipmdprop['etTag']
             if isinstance(teststruct, list):
                 propfound: bool = False
                 if len(teststruct) > 0:
@@ -316,7 +316,7 @@ def investigate_ipmdstructure(parent_propnames: str, ugtopic: str, parent_so: st
             csvrow += 'not spec' + csvsep
         csvrow += '---' + csvsep
         append_line2file(csvrow, testresults_csv_fp)
-        if invstructid != '':
+        if invstructid != '':  # if the id of a to-be-investigated structure is set: investigate at the next level
             investigate_ipmdstructure(parent_propnames + csvsep + label, ugtopic, parent_so + '-' + sortorder,
                                       level + 1, invstructid, xmpvalue,
                                       testresults_text_fp, testresults_csv_fp, csvsep)
@@ -334,36 +334,38 @@ def investigate_mainpmd(test_json_fp: str, testresults_text_fp: str, testresults
     with open(test_json_fp, encoding='utf-8') as testjson_file:
         ipmdtest = json.load(testjson_file)[0]
 
+    # write the header of the CSV-output file
     csvheader: str = f'topic{csvsep}sortorder{csvsep}IPMD Name L1{csvsep}IPMD Name L2{csvsep}IPMD Name L3'
     csvheader += f'{csvsep}IIM prop{csvsep}XMP prop{csvsep}Sync Values{csvsep}Comments'
     append_line2file(csvheader, testresults_csv_fp)
-    groupname = 'ipmd_top'
-    for ipmdpropid in pmdguide[groupname]:
-        ipmdprop: dict = pmdguide[groupname][ipmdpropid]
-        if 'label' in ipmdprop:
-            label: str = ipmdprop['label']
+
+    refgroupname: str = 'ipmd_top'  # the top level of IPTC PMD is investigated, this is the corresponding group
+    for ipmdpropid in pmdguide[refgroupname]:
+        refipmdprop: dict = pmdguide[refgroupname][ipmdpropid]
+        if 'label' in refipmdprop:
+            label: str = refipmdprop['label']
         else:
-            label: str = 'UNKNOWN-ERROR'
-        msg: str = f'*** Investigating IPTC PMD property <{label}>'
+            label: str = 'UNKNOWN-ERROR'  # a property without a label should not be in the reference data
+        msg: str = f'*** Investigating IPTC PMD top level property <{label}>'
         print(msg)
         append_line2file(msg, testresults_text_fp)
-        if 'ugtopic' in ipmdprop:
-            ugtopic: str = ipmdprop['ugtopic']
+        if 'ugtopic' in refipmdprop:
+            ugtopic: str = refipmdprop['ugtopic']
         else:
             ugtopic: str = 'xxx'
         csvrow: str = ugtopic + csvsep
-        if 'sortorder' in ipmdprop:
-            sortorder: str = ipmdprop['sortorder']
+        if 'sortorder' in refipmdprop:
+            sortorder: str = refipmdprop['sortorder']
         else:
             sortorder: str = 'xxx'
         csvrow += sortorder + csvsep
         csvrow += label + csvsep + 'x' + csvsep + 'x' + csvsep  # Name L1 is set, L2 and L3 x-ed out
         datatype: str = 'xxx'
-        if 'datatype' in ipmdprop:
-            datatype: str = ipmdprop['datatype']
+        if 'datatype' in refipmdprop:
+            datatype: str = refipmdprop['datatype']
         dataformat: str = ''
-        if 'dataformat' in ipmdprop:
-            dataformat: str = ipmdprop['dataformat']
+        if 'dataformat' in refipmdprop:
+            dataformat = refipmdprop['dataformat']
         invstructid: str = ''  # id/name of a structure to be investigated
         if datatype == 'struct':
             if dataformat == 'AltLang':  # workaround to cover what ExifTool returns for AltLang values: a string
@@ -378,14 +380,14 @@ def investigate_mainpmd(test_json_fp: str, testresults_text_fp: str, testresults
         iimvalue: str = ''
         xmpvalue = ''
 
-        special_comparing: str = ''  # indicated a special procedure for comparing values
+        special_comparing: str = ''  # indicates special procedure(s) for comparing values, pipe separated
         if ipmdpropid == 'creatorNames':
             special_comparing += 'iim1xmplist|'
         if ipmdpropid == 'dateCreated':
             special_comparing += 'iimdatetime|'
 
-        if 'etIIM' in ipmdprop:
-            ettag = ipmdprop['etIIM']
+        if 'etIIM' in refipmdprop:
+            ettag = refipmdprop['etIIM']
             if ettag in ipmdtest:
                 keymsg = 'found'
                 iimfound = True
@@ -403,8 +405,8 @@ def investigate_mainpmd(test_json_fp: str, testresults_text_fp: str, testresults
             csvrow += keymsg + csvsep
         else:
             csvrow += 'not spec' + csvsep
-        if 'etXMP' in ipmdprop:
-            ettag = ipmdprop['etXMP']
+        if 'etXMP' in refipmdprop:
+            ettag = refipmdprop['etXMP']
             if ettag in ipmdtest:
                 keymsg = 'found'
                 xmpvalue = ipmdtest[ettag]
@@ -417,7 +419,7 @@ def investigate_mainpmd(test_json_fp: str, testresults_text_fp: str, testresults
         else:
             csvrow += 'not spec' + csvsep
         keymsg = '---'
-        # compare plain values
+        # compare only plain values
         if plainvalue:
             if iimfound:
                 if iimvalue == xmpvalue:
@@ -446,14 +448,10 @@ def investigate_mainpmd(test_json_fp: str, testresults_text_fp: str, testresults
                     keymsg = 'in sync'
                 else:
                     keymsg = 'NOT SYNC'
-
-
-
         csvrow += keymsg + csvsep
         append_line2file(csvrow, testresults_csv_fp)
-        if invstructid != '':
+        if invstructid != '': # if the id of a to-be-investigated structure is set: investigate at the next level
             investigate_ipmdstructure(label, ugtopic, sortorder, 2, invstructid, xmpvalue,
                                       testresults_text_fp, testresults_csv_fp, csvsep)
-
 
 
